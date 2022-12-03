@@ -5,12 +5,38 @@
         <div class="container">
           <div class="row my-4">
             <div class="col">
-              
-            </div>
-          </div>
-          <div class="row my-4">
-            <div class="col text-center">
-              <a routerLink="/registro" class="link-primary">No tienes cuenta? Registrarse</a>
+              <form [formGroup]="formInicioSesion" (ngSubmit)="iniciarSesion()" class="needs-validation" novalidate>
+                <div class="form-group mb-3">
+                  <label class="form-label">ID</label>
+                  <input type="number" class="form-control" formControlName="ID" 
+                  [ngClass]="formInicioSesion.controls['ID'].valid ? 'is-valid' : '' + formInicioSesion.controls['ID'].invalid && formInicioSesion.controls['ID'].touched ? 'is-invalid' : ''"
+                  placeholder="Escriba un ID"/>
+                  <div class="invalid-feedback" *ngIf="formInicioSesion.controls['ID'].invalid && formInicioSesion.controls['ID'].touched ? 'is-invalid' : ''">
+                    <div *ngIf="formInicioSesion.get(['ID'])?.errors?.['pattern']">
+                      El ID debe ser un número de 6 dígitos
+                    </div>
+                    <div *ngIf="formInicioSesion.get(['ID'])?.errors?.['required']">
+                      Debe ingresar un ID.
+                    </div>  
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" formControlName="contrasena" 
+                  [ngClass]="formInicioSesion.controls['contrasena'].valid ? 'is-valid' : '' + formInicioSesion.controls['contrasena'].invalid && formInicioSesion.controls['contrasena'].touched ? 'is-invalid' : ''"
+                  placeholder="Escriba una contraseña"/>
+                  <div class="invalid-feedback" *ngIf="formInicioSesion.controls['contrasena'].invalid && formInicioSesion.controls['contrasena'].touched ? 'is-invalid' : ''">
+                    <div *ngIf="formInicioSesion.get(['contrasena'])?.errors?.['required']">
+                      Debe ingresar una contraseña.
+                    </div>  
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-secondary btn-block" [disabled]="!formInicioSesion.valid">
+                    Iniciar Sesión
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
