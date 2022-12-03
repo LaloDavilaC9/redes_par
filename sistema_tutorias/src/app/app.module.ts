@@ -5,16 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //Vistas
-import { InicioComponent } from './vistas/inicio/inicio.component';
 
 //Modulos
 import { AutentificacionModule } from './modulos/autentificacion/autentificacion.module';
 import { AlumnoModule } from './modulos/alumno/alumno.module';
+import { BarraNavComponent } from './componentes/barra-nav/barra-nav.component';
+import { RegistroComponent } from './modulos/autentificacion/componentes/registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent
+    BarraNavComponent,
   ],
   imports: [
     BrowserModule,
