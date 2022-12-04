@@ -13,11 +13,13 @@ import { ModuloRespuestaComponent } from './vistas/modulo-respuesta/modulo-respu
 import { SolicitudTutorComponent } from './modulos/tutor/componentes/solicitud-tutor/solicitud-tutor.component';
 import { ProcesoTutorComponent } from './modulos/tutor/componentes/proceso-tutor/proceso-tutor.component';
 import { ProximasTutorComponent } from './modulos/tutor/componentes/proximas-tutor/proximas-tutor.component';
+import { PermisoAlumnoGuard } from './permisos/permiso-alumno.guard';
+import { PermisoTutorGuard } from './permisos/permiso-tutor.guard';
 
 const routes: Routes = [
   { path: 'registro', component: RegistroComponent }, 
   { path: 'inicio-sesion', component: InicioSesionComponent },
-  { path: 'tutor', component: ModuloRespuestaComponent,
+  { path: 'tutor', component: ModuloRespuestaComponent, canActivate: [PermisoTutorGuard],
     children: [
       {path: 'solicitud', component: SolicitudTutorComponent },
       {path: 'proceso', component: ProcesoTutorComponent },
@@ -25,7 +27,7 @@ const routes: Routes = [
       {path: '', component: SolicitudTutorComponent }
     ]
   },
-  { path: 'alumno', component: ModuloAsesoriaComponent,
+  { path: 'alumno', component: ModuloAsesoriaComponent, canActivate: [PermisoAlumnoGuard],
     children: [
       {path: 'solicitud', component: SolicitudTutorComponent },
       {path: 'proceso', component: ProcesoTutorComponent },
