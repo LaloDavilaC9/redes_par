@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modulo-respuesta.component.css']
 })
 export class ModuloRespuestaComponent implements OnInit {
-  valor : Boolean = false
+  //seleccion : number = 1
   constructor() { }
 
   ngOnInit(): void {
