@@ -11,6 +11,7 @@ import { AutentificacionModule } from './modulos/autentificacion/autentificacion
 import { AlumnoModule } from './modulos/alumno/alumno.module';
 import { BarraNavComponent } from './componentes/barra-nav/barra-nav.component';
 import { RegistroComponent } from './modulos/autentificacion/componentes/registro/registro.component';
+import { TutorModule } from './modulos/tutor/tutor.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RegistroComponent } from './modulos/autentificacion/componentes/registr
     BrowserModule,
     AppRoutingModule,
     AutentificacionModule,
-    AlumnoModule
+    AlumnoModule,
+    TutorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

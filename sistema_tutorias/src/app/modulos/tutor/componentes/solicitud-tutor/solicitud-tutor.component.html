@@ -1,1 +1,27 @@
-<p>solicitud-tutor works!</p>
+<br><br>
+<div class="contenedor" *ngFor="let solicitud of solicitudes">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <p id="nombre">{{solicitud.alumnoAsesorado.nombre.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </p>
+            </div>
+            <div class="col" >
+                
+                <p class="urgencia" *ngIf="solicitud.urgencia">URGENTE</p>
+                <p class="urgencia" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p id="materia">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</p>
+            </div>
+            <div class="col">
+                <button class="btn btn-success">ACEPTAR</button>
+                <button class="btn btn-danger">CANCELAR</button>
+                <button class="btn btn-primary">VER MÁS</button>
+            </div>
+        </div>
+    </div>
+   
+</div>
