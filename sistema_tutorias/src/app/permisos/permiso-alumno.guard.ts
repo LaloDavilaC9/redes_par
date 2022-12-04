@@ -17,6 +17,5 @@ export class PermisoAlumnoGuard implements CanActivate {
         this.router.navigate(['inicio-sesion']);
       }
       return true;
-  }
-  
+  } 
 }
