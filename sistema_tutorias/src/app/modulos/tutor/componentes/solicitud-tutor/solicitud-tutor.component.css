@@ -3,7 +3,7 @@
     color: white;
     width: 75%;
     border-radius: 20px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
     height: 115px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
@@ -20,7 +20,7 @@
     margin-top: -15px;
 }
 
-#urgencia{
+.urgencia{
     font-size: 23px;
     margin-top: 20px;
     color: #ffff66;

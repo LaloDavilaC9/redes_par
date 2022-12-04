@@ -10,6 +10,7 @@ export class ModuloRespuestaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
