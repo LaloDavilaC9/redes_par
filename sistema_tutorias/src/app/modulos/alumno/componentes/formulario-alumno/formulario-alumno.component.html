@@ -1,0 +1,112 @@
+<h1 class="fw-bold text-center">Registro de alumno</h1>
+<h2 class=""></h2>
+<div>
+  <form [formGroup]="formRegistroAlumno" (ngSubmit)="registrarAlumno()" class="needs-validation" novalidate>
+    <!--ID del alumno-->
+    <div class="form-group mb-3">
+      <label class="form-label">ID</label>
+      <input type="number" class="form-control" formControlName="ID" 
+      [ngClass]="formRegistroAlumno.controls['ID'].valid ? 'is-valid': '' + formRegistroAlumno.controls['ID'].invalid && formRegistroAlumno.controls['ID'].touched? 'is-invalid': ''"
+      placeholder="Escriba un ID"/>
+      <div class="invalid-feedback" 
+      *ngIf=" formRegistroAlumno.controls['ID'].invalid && formRegistroAlumno.controls['ID'].touched ? 'is-invalid': ''">
+        <div *ngIf="formRegistroAlumno.get(['ID'])?.errors?.['pattern']">
+          El ID debe ser un número de 6 dígitos
+        </div>
+        <div *ngIf="formRegistroAlumno.get(['ID'])?.errors?.['required']">
+          Debe ingresar un ID.
+        </div>
+      </div>
+    </div>
+    <!--Nombre del alumno-->
+    <div class="form-group mb-3">
+      <label class="form-label">Nombre(s)</label>
+      <input type="text" class="form-control" formControlName="nombre" 
+      [ngClass]="formRegistroAlumno.controls['nombre'].valid ? 'is-valid': '' + formRegistroAlumno.controls['nombre'].invalid && formRegistroAlumno.controls['nombre'].touched? 'is-invalid': ''"
+      placeholder="Escriba nombre(s)"/>
+      <div class="invalid-feedback" 
+      *ngIf=" formRegistroAlumno.controls['nombre'].invalid && formRegistroAlumno.controls['nombre'].touched ? 'is-invalid': ''">
+        <div *ngIf="formRegistroAlumno.get(['nombre'])?.errors?.['required']">
+          Debe ingresar un nombre.
+        </div>
+      </div>
+    </div>
+    <!--Apellidos del alumno-->
+    <div class="row mb-3">
+      <div class="form-group col-6">
+        <label class="form-label">Apellido Paterno</label>
+        <input type="text" class="form-control" formControlName="apellidoPaterno" 
+        [ngClass]="formRegistroAlumno.controls['apellidoPaterno'].valid && formRegistroAlumno.controls['apellidoPaterno'].touched ? 'is-valid' : ''"
+        placeholder="Primer apellido"/>
+      </div>
+      <div class="form-group col-6">
+        <label class="form-label">Apellido Materno</label>
+        <input type="text" class="form-control" formControlName="apellidoMaterno" 
+        [ngClass]="formRegistroAlumno.controls['apellidoMaterno'].valid && formRegistroAlumno.controls['apellidoMaterno'].touched ? 'is-valid' : ''"
+        placeholder="Segundo apellido"/>
+      </div>
+    </div>
+    <!--Semestre del alumno-->
+    <div class="form-group mb-3">
+      <label class="form-label">Teléfono</label>
+      <input type="text" class="form-control" formControlName="telefono" 
+      [ngClass]="formRegistroAlumno.controls['telefono'].valid ? 'is-valid': '' + formRegistroAlumno.controls['telefono'].invalid && formRegistroAlumno.controls['telefono'].touched? 'is-invalid': ''"
+      placeholder="Teléfono"/>
+      <div class="invalid-feedback" 
+      *ngIf=" formRegistroAlumno.controls['telefono'].invalid && formRegistroAlumno.controls['telefono'].touched ? 'is-invalid': ''">
+        <div *ngIf="formRegistroAlumno.get(['telefono'])?.errors?.['required']">
+          Debe ingresar un teléfono.
+        </div>
+        <div *ngIf="formRegistroAlumno.get(['telefono'])?.errors?.['pattern']">
+          No corresponde al formato internacional.
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label class="form-label">Semestre</label>
+      <select class="form-select" id="fsemestre" formControlName="semestre" 
+      [ngClass]="formRegistroAlumno.controls['semestre'].valid ? 'is-valid' : '' + formRegistroAlumno.controls['semestre'].invalid && formRegistroAlumno.controls['semestre'].touched ? 'is-invalid' : ''">
+        <option *ngFor="let semestre of semestres" [ngValue]="semestre">
+          {{ semestre }}
+        </option>
+      </select>
+      <div class="invalid-feedback" *ngIf="formRegistroAlumno.controls['semestre'].invalid && formRegistroAlumno.controls['semestre'].touched">
+        <div *ngIf="formRegistroAlumno.controls['semestre'].errors?.['required']">
+          Es necesario seleccionar el semestre actual.
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label class="form-label">Correo electrónico</label>
+      <input type="text" class="form-control" formControlName="correo" 
+      [ngClass]="formRegistroAlumno.controls['correo'].valid ? 'is-valid' : '' + formRegistroAlumno.controls['correo'].invalid && formRegistroAlumno.controls['correo'].touched ? 'is-invalid' : ''"
+      placeholder="Escriba un correo"/>
+      <div class="invalid-feedback" *ngIf="formRegistroAlumno.controls['correo'].invalid && formRegistroAlumno.controls['correo'].touched ? 'is-invalid' : ''">
+        <div *ngIf="formRegistroAlumno.get(['correo'])?.errors?.['email']">
+          No corresponde al formato de correo electrónico.
+        </div>
+        <div *ngIf="formRegistroAlumno.get(['correo'])?.errors?.['required']">
+          Debe ingresar un correo electrónico.
+        </div>  
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label class="form-label">Contraseña</label>
+      <input type="password" class="form-control" formControlName="clave" 
+      [ngClass]="formRegistroAlumno.controls['clave'].valid ? 'is-valid': '' + formRegistroAlumno.controls['clave'].invalid && formRegistroAlumno.controls['clave'].touched ? 'is-invalid': ''"
+      placeholder="Escriba una contraseña"
+      />
+      <div class="invalid-feedback" *ngIf="formRegistroAlumno.controls['clave'].invalid && formRegistroAlumno.controls['clave'].touched ? 'is-invalid': ''">
+        <div *ngIf="formRegistroAlumno.get(['clave'])?.errors?.['required']">
+          Debe ingresar una contraseña.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-secondary btn-block" [disabled]="!formRegistroAlumno.valid">
+        Registrarse
+      </button>
+    </div>
+  </form>
+</div>
+
