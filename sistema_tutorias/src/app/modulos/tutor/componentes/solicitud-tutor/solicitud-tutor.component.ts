@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { solicitud } from '../../modelos/solicitud.model';
-import { solicitudSimplificada } from '../../modelos/solicitud-simplificada.model';
+import { solicitud } from 'src/app/modelos/solicitud.model';
 
 @Component({
   selector: 'app-solicitud-tutor',

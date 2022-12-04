@@ -10,13 +10,16 @@ import { AppComponent } from './app.component';
 import { AutentificacionModule } from './modulos/autentificacion/autentificacion.module';
 import { AlumnoModule } from './modulos/alumno/alumno.module';
 import { BarraNavComponent } from './componentes/barra-nav/barra-nav.component';
-import { RegistroComponent } from './modulos/autentificacion/componentes/registro/registro.component';
 import { TutorModule } from './modulos/tutor/tutor.module';
+import { ModuloRespuestaComponent } from './vistas/modulo-respuesta/modulo-respuesta.component';
+import { ModuloAsesoriaComponent } from './vistas/modulo-asesoria/modulo-asesoria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BarraNavComponent,
+    ModuloRespuestaComponent,
+    ModuloAsesoriaComponent,
   ],
   imports: [
     BrowserModule,

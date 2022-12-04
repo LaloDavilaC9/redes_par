@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Alumno } from 'src/app/modulos/alumno/modelos/alumno.model';
+import { Alumno } from 'src/app/modelos/alumno.model';
 
 @Component({
   selector: 'app-formulario-alumno',

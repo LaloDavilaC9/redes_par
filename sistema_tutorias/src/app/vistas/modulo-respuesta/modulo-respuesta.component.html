@@ -1,0 +1,27 @@
+<div class="container-fluid p-5">
+  <div class="row">
+    <div class="col">
+        <h1>Módulo de respuesta a alumnos</h1>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col">
+      <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/tutor/solicitud']">Solicitudes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/tutor/proceso']">En proceso</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/tutor/proximas']">Próximas</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

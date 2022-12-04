@@ -4,7 +4,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Alumno
-import { Alumno } from '../../alumno/modelos/alumno.model';
+import { Alumno } from 'src/app/modelos/alumno.model';
 
 //Tutor
 
