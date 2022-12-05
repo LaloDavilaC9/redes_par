@@ -9,8 +9,9 @@ import { Tutor } from 'src/app/modelos/tutor.model';
 })
 export class SolicitudTutorComponent implements OnInit {
 
-  solicitudes : solicitud[] = []
+  solicitudes : solicitud[] = [];
   tutorActual!: Tutor;
+  solicitudDetalle! : solicitud;
 
   constructor() { 
 
@@ -33,6 +34,11 @@ export class SolicitudTutorComponent implements OnInit {
           nombre: "Estructuras de Datos",
           semestre: 3
         },
+        {
+          ID : 2,
+          nombre: "Álgebra Lineal",
+          semestre: 2
+        },
       ]
     };
 
@@ -40,7 +46,7 @@ export class SolicitudTutorComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const solicitud1 : solicitud ={
+    var solicitud1 : solicitud ={
       ID : 5,
       alumnoAsesorado : {
         ID : 269314,
@@ -75,25 +81,55 @@ export class SolicitudTutorComponent implements OnInit {
         ]
       },
 
-
-        
-   
       fechaPeticion : "",
       urgencia : false,
       materiaAsociada : {
-        ID : 1,
-        nombre : "Estructuras de datos",
-        semestre : 3
+          ID : 2,
+          nombre: "Álgebra Lineal",
+          semestre: 2
       },
       tema : "Ciclos",
       descripcion: "No le entiendo a mi profe",
-      fechaAsesoria : "27/01/2023",
+      fechaAsesoria : "",
       sitio : "",
       modalidad : "",
-      tutoresNoDisponibles : []
+      tutoresNoDisponibles : [
+        
+        /*{
+          ID : 0,
+          alumnoAsesorias: {
+            ID: 0,
+            nombre:  "",
+            apellidoPaterno:  "",
+            apellidoMaterno: "",
+            semestre: 0,
+            telefono:   "",
+            correo:  "",
+            clave:  "",
+            imagen:  "",
+          },
+          materiasAsesorias:[
+            {
+              ID : 1,
+              nombre: "Estructuras de Datos",
+              semestre: 3
+            },
+            {
+              ID : 2,
+              nombre: "Álgebra Lineal",
+              semestre: 2
+            },
+          ]
+        }*/
+      ]
+
     }
 
+    //inicializamos solicitud detalle con cualquier cosa
+    this.solicitudDetalle = solicitud1;
+
     this.solicitudes.push(solicitud1);
+    solicitud1.ID = 6;
     this.solicitudes.push(solicitud1);
     this.solicitudes.push(solicitud1);
     
@@ -102,12 +138,38 @@ export class SolicitudTutorComponent implements OnInit {
   mostrarSolicitud(solicitudA : solicitud) : boolean{
 
     //El tutor no da la materia que pide la solicitud
-    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.ID == solicitudA.materiaAsociada.ID).length == 0){
+    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.ID == solicitudA.materiaAsociada.ID).length == 0)
       return false;
-    }
+
+
+    //El tutor ya rechazó la solicitud alguna vez
+    if(solicitudA.tutoresNoDisponibles.filter(elemento => elemento.ID == this.tutorActual.ID).length != 0)
+      return false;
+    
+
+    //Si un tutor ya aceptó, no lo muestra
+    if(solicitudA.tutorAsesorias.ID != 0)
+      return false;
+
+    
+    //Rectificamos que no haya una fecha programada
+    if(solicitudA.fechaAsesoria != "")
+      return false;
+
    
     return true;
   }
+
+  aceptar() : void{
+
+  }
+
+  verMas( id : number):void{
+    const indice  = this.solicitudes.map(sol => sol.ID).indexOf(id);
+    this.solicitudDetalle = this.solicitudes[indice];
+    //alert("La solicitud es: "+this.solicitudDetalle.ID);
+  }
+
 }
 
 

@@ -13,13 +13,45 @@
                 <div class="col" >
                     <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
                     <h4 class="text-warning fw-bold" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</h4>
-                    <button class="btn btn-success btn-lg m-2">ACEPTAR</button>
+                    <button class="btn btn-success btn-lg m-2" (click)="aceptar()">ACEPTAR</button>
                     <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
-                    <button class="btn btn-info btn-lg m-2">VER MÁS</button>
+                    <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal" data-bs-target="#modalDetalles" (click)="verMas(solicitud.ID)">VER MÁS</button>
                 </div>
             </div>
         </div>
     
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade " id="modalDetalles" tabindex="-1" aria-labelledby="modalDetalles" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDetallesNombre">DETALLES DE ASESORÍA</h5>
+        </div>
+        <div class="modal-body">
+            <div class="mb-2">
+                <label class="form-label">Materia solicitada</label>
+                <input type="text" value=" {{solicitudDetalle.materiaAsociada.nombre.toUpperCase()}}" class="form-control" readonly >
+
+                <label class="form-label">Alumno</label>
+                <input type="text" value="{{solicitudDetalle.alumnoAsesorado.nombre.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoMaterno.toUpperCase()}}" class="form-control" readonly >
+
+                <label class="form-label">Tema</label>
+                <input type="text" value="{{solicitudDetalle.tema}}" class="form-control"  readonly >
+
+                <label class="form-label">Descripción de necesidades</label>
+                <input type="text" value="{{solicitudDetalle.descripcion}}" class="form-control"  readonly >
+
+
+        
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
+        </div>
+      </div>
     </div>
 </div>
 
