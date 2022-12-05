@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { solicitud } from 'src/app/modelos/solicitud.model';
+import { Tutor } from 'src/app/modelos/tutor.model';
 
 @Component({
   selector: 'app-solicitud-tutor',
@@ -9,10 +10,36 @@ import { solicitud } from 'src/app/modelos/solicitud.model';
 export class SolicitudTutorComponent implements OnInit {
 
   solicitudes : solicitud[] = []
+  tutorActual!: Tutor;
 
-  constructor() { }
+  constructor() { 
+
+    this.tutorActual = {
+      ID : 0,
+      alumnoAsesorias: {
+        ID: 0,
+        nombre:  "",
+        apellidoPaterno:  "",
+        apellidoMaterno: "",
+        semestre: 0,
+        telefono:   "",
+        correo:  "",
+        clave:  "",
+        imagen:  "",
+      },
+      materiasAsesorias:[
+        {
+          ID : 1,
+          nombre: "Estructuras de Datos",
+          semestre: 3
+        },
+      ]
+    };
+
+  }
 
   ngOnInit(): void {
+
     const solicitud1 : solicitud ={
       ID : 5,
       alumnoAsesorado : {
@@ -27,7 +54,68 @@ export class SolicitudTutorComponent implements OnInit {
         imagen : ""
       },
       tutorAsesorias : {
-        ID : 247101,
+        ID : 0,
+        alumnoAsesorias: {
+          ID: 0,
+          nombre:  "",
+          apellidoPaterno:  "",
+          apellidoMaterno: "",
+          semestre: 0,
+          telefono:   "",
+          correo:  "",
+          clave:  "",
+          imagen:  "",
+        },
+        materiasAsesorias:[
+          {
+            ID : 0,
+            nombre: "",
+            semestre: 0
+          },
+        ]
+      },
+
+
+        
+   
+      fechaPeticion : "",
+      urgencia : false,
+      materiaAsociada : {
+        ID : 1,
+        nombre : "Estructuras de datos",
+        semestre : 3
+      },
+      tema : "Ciclos",
+      descripcion: "No le entiendo a mi profe",
+      fechaAsesoria : "27/01/2023",
+      sitio : "",
+      modalidad : "",
+      tutoresNoDisponibles : []
+    }
+
+    this.solicitudes.push(solicitud1);
+    this.solicitudes.push(solicitud1);
+    this.solicitudes.push(solicitud1);
+    
+  }
+
+  mostrarSolicitud(solicitudA : solicitud) : boolean{
+
+    //El tutor no da la materia que pide la solicitud
+    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.ID == solicitudA.materiaAsociada.ID).length == 0){
+      return false;
+    }
+   
+    return true;
+  }
+}
+
+
+
+
+
+
+/*{ID : 247101,
         alumnoAsesorias :{
           ID : 247101,
           nombre: "Cynthia Maritza",
@@ -45,27 +133,4 @@ export class SolicitudTutorComponent implements OnInit {
             nombre : "Estructuras de datos",
             semestre : 3
           }
-        ]
-      },
-      fechaPeticion : "25/01/2022",
-      urgencia : false,
-      materiaAsociada : {
-        ID : 1,
-        nombre : "Estructuras de datos",
-        semestre : 3
-      },
-      tema : "Ciclos",
-      descripcion: "No le entiendo a mi profe",
-      fechaAsesoria : "",
-      sitio : "",
-      modalidad : "",
-      tutoresNoDisponibles : []
-    }
-
-    this.solicitudes.push(solicitud1);
-    this.solicitudes.push(solicitud1);
-    this.solicitudes.push(solicitud1);
-    
-  }
-
-}
+        ]*/
