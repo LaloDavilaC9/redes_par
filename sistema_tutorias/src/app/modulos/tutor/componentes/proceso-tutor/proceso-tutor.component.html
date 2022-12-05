@@ -1,1 +1,29 @@
-<p>proceso-tutor works!</p>
+<br><br>
+
+<div  *ngFor="let solicitud of solicitudes" class="card text-white bg-primary mb-3" >
+
+    <div class="card-body">
+
+      <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <h4>{{solicitud.alumnoAsesorado.nombre.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </h4>
+            </div>
+            <div class="col" >
+                <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
+                <h4 class="text-warning fw-bold" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h3 class="fw-bold">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</h3>
+            </div>
+            <div class="col">
+                <button class="btn btn-success btn-lg mx-2">CONFIRMAR</button>
+                <button class="btn btn-danger btn-lg mx-2">CANCELAR</button>
+                <button class="btn btn-info btn-lg mx-2">VER MÁS</button>
+            </div>
+        </div>
+    </div>
+</div>
