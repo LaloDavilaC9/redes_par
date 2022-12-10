@@ -16,7 +16,7 @@ export class SolicitudTutorComponent implements OnInit {
   constructor() { 
 
     this.tutorActual = {
-      ID : 0,
+      ID : 1,
       alumnoAsesorias: {
         ID: 0,
         nombre:  "",
