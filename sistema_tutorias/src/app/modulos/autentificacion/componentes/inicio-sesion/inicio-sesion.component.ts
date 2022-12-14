@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Alumno } from 'src/app/modelos/alumno.model';
 import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 import { AutentificacionService } from '../../servicios/autentificacion.service';
-import { Md5 } from 'ts-md5';
 import { Router } from '@angular/router';
 
 @Component({
