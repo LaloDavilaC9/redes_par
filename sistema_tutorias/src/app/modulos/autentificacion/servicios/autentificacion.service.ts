@@ -8,6 +8,7 @@ import { parse } from 'path';
 //Alumno
 import { Alumno } from 'src/app/modelos/alumno.model';
 import { Tutor } from 'src/app/modelos/tutor.model';
+import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 
 //Tutor
 
@@ -15,52 +16,25 @@ import { Tutor } from 'src/app/modelos/tutor.model';
   providedIn: 'root',
 })
 export class AutentificacionService {
-  alumno!: Alumno;
-  tutor!: Tutor;
+  
+  tutorActual: Tutor = new Tutor();
+  idAlumno: number = 0;
+  idTutor : number = 0;
+  autorizacion: boolean = false; 
 
-  //Tipo de sesión, 1 alumno, 2 tutor
-  tipo: number = 0;
 
-  constructor(public router: Router, public ngZone: NgZone) {
+  constructor(public router: Router,private servicio: ServicioApiService) {
   }
 
-  iniciarSesionTutor(datos: Tutor): void {
-    sessionStorage.setItem('alumno', JSON.stringify(datos));
-    this.actualizarTutor();
+
+  asignarDatosAlumno(id: number){
+    this.idAlumno = id;
+    //Obtener id del tutor
   }
 
-  iniciarSesionAlumno(datos: Alumno): void {
-    sessionStorage.setItem('alumno', JSON.stringify(datos));
-    this.actualizarAlumno();
-  }
 
-  //Funciones para establecer y obtener el estado como tutor o alumno
-  /*establecerTipo(valor: number) {
-    this.tipo = valor;
-  }
-
-  get obtenerTipo(): number {
-    return this.tipo;
-  }*/
-
-  actualizarAlumno(): void {
-    const aux = sessionStorage.getItem('alumno');
-    if(aux != null)
-      this.alumno = JSON.parse(aux) as Alumno;
-  }
-
-  actualizarTutor(): void {
-    const aux = sessionStorage.getItem('tutor');
-    if(aux != null)
-      this.tutor = JSON.parse(aux) as Tutor;
-  }
-
-  //Funciones para ver si existe alguien en sesión
-  get sesionActual(): number {
-    //Un dato en sessionStorage -> alumno
-    //Dos datos -> tutor
-    //Ninguno -> No hay sesión iniciada
-    return sessionStorage.length;
+  get getStatus(): boolean {
+    return this.autorizacion;
   }
 
   //Función para cerrar sesión

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'src/app/modelos/alumno.model';
 import { solicitud } from 'src/app/modelos/solicitud.model';
 import { Tutor } from 'src/app/modelos/tutor.model';
+import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
+import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 
 @Component({
   selector: 'app-proximas-alumno',
@@ -10,79 +12,25 @@ import { Tutor } from 'src/app/modelos/tutor.model';
 })
 export class ProximasAlumnoComponent implements OnInit {
 
-  solicitudProxima!: solicitud;
+  solicitudProxima: solicitud = new solicitud();;
 
   solicitudes : solicitud[] = []
   alumnoActual!: Alumno;
   totalAsesorias : Number = 0;
-  constructor() { 
-    this.alumnoActual = {
-      id: 226582,
-      nombre: "Cynthia Maritza",
-      apellidoPaterno: "Terán",
-      apellidoMaterno: "Carranza",
-      semestre: 7,
-      telefono: "4491808868",
-      correo: "al226582@edu.uaa.mx",
-      clave: "1234",
-      imagen: ""
-    };
+
+  constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
   }
 
   ngOnInit(): void {
-    const solicitud1 : solicitud ={
-      id : 5,
-      alumnoAsesorado : {
-        id: 226582,
-        nombre: "Cynthia Maritza",
-        apellidoPaterno: "Terán",
-        apellidoMaterno: "Carranza",
-        semestre: 7,
-        telefono: "4491808868",
-        correo: "al226582@edu.uaa.mx",
-        clave: "1234",
-        imagen: ""
-      },
+    //Obtener los datos del alumno
+    this.servicio.getJSON('alumno/obtener/' + this.authservicio.idAlumno).subscribe((res: any)=>{
+      this.alumnoActual = res as Alumno;
+    });
 
-      tutorAsesorias : {
-        id : 2,
-        alumnoAsesorias :{
-          id : 247101,
-          nombre: "",
-          apellidoPaterno : "Terán",
-          apellidoMaterno : "Carranza",
-          semestre : 7,
-          telefono : "4499205022",
-          correo : "cynthia@gmail.com",
-          clave : "1234",
-          imagen : ""
-        },
-        materiasAsesorias: [
-          {
-            id : 1,
-            nombre : "Estructuras de datos",
-            semestre : 3
-          }
-        ]
-      },
-      fechaPeticion : "25/01/2022",
-      urgencia : false,
-      materiaAsesoria : {
-        id : 1,
-        nombre : "Estructuras de datos",
-        semestre : 3
-      },
-      tema : "Ciclos",
-      descripcion: "No le entiendo a mi profe",
-      fechaAsesoria : "12/12/2023 10:00:00",
-      sitio : "",
-      modalidad : "",
-      tutoresNoDisponibles : []
-    }
-    this.solicitudes.push(solicitud1);
-
-    //Inicializar variable para detalles de solicitud
-    this.establecerSProxima();
+    //Obtener los datos de las asesorias que involucran al alumno
+    this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.authservicio.idAlumno).subscribe((res: any)=>{
+      this.solicitudes = res as solicitud[];
+    });
   }
 
   //Función que filtra que solicitues se muestran
@@ -105,9 +53,5 @@ export class ProximasAlumnoComponent implements OnInit {
 
   detallesSolicitud(solicitudP: solicitud): void {
     this.solicitudProxima= solicitudP;
-  }
-
-  establecerSProxima(){
-    this.solicitudProxima = this.solicitudes[0];
   }
 }

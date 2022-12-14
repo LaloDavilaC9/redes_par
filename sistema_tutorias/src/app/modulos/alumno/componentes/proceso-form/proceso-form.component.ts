@@ -9,7 +9,7 @@ import { solicitud } from 'src/app/modelos/solicitud.model';
 })
 export class ProcesoFormComponent implements OnInit {
 
-  @Input() solicitudProceso!: solicitud;
+  @Input() solicitudProceso: solicitud = new solicitud();
 
   constructor() { }
 

@@ -8,7 +8,7 @@ import { solicitud } from 'src/app/modelos/solicitud.model';
 })
 export class ProximasFormComponent implements OnInit {
 
-  @Input() solicitudProxima!: solicitud;
+  @Input() solicitudProxima: solicitud = new solicitud();
 
   constructor() { }
 

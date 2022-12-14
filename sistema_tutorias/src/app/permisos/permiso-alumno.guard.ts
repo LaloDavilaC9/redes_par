@@ -13,7 +13,7 @@ export class PermisoAlumnoGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.servicioAut.sesionActual == 0) {
+      if (!this.servicioAut.getStatus) {
         this.router.navigate(['inicio-sesion']);
       }
       return true;

@@ -11,7 +11,7 @@ import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 })
 export class ProcesoAlumnoComponent implements OnInit {
 
-  solicitudProceso!: solicitud;
+  solicitudProceso: solicitud = new solicitud();
 
   solicitudes : solicitud[] = []
   alumnoActual!: Alumno;
@@ -20,17 +20,20 @@ export class ProcesoAlumnoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.alumnoActual = this.servicio.getJSON('alumno/obtener/' + this.authservicio.alumno.id);
-    this.solicitudes = this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.authservicio.alumno.id)
-    
 
-    //Inicializar variable para detalles de solicitud
-    this.establecerSProceso();
+    //Obtener los datos del alumno
+    this.servicio.getJSON('alumno/obtener/' + this.authservicio.idAlumno).subscribe((res: any)=>{
+      this.alumnoActual = res as Alumno;
+    });
+
+    //Obtener los datos de las asesorias que involucran al alumno
+    this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.authservicio.idAlumno).subscribe((res: any)=>{
+      this.solicitudes = res as solicitud[];
+    });
   }
 
   //Función que filtra que solicitues se muestran
   //Para Proceso módulo solicitudes
-
   mostrarSolicitud(solicitud : solicitud) : boolean{
 
     //La solicitud no es del alumno
@@ -51,7 +54,4 @@ export class ProcesoAlumnoComponent implements OnInit {
     this.solicitudProceso = solicitudP;
   }
 
-  establecerSProceso(){
-    this.solicitudProceso = this.solicitudes[0];
-  }
 }

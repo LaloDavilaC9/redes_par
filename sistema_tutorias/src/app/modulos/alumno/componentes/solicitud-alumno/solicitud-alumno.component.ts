@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Materia } from 'src/app/modelos/materia.model';
 import { solicitud } from 'src/app/modelos/solicitud.model';
+import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
 import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 
 @Component({
@@ -13,11 +14,11 @@ export class SolicitudAlumnoComponent implements OnInit {
 
   formSolicitud: FormGroup;
 
-  modalidades: string[] = ["Presencial", "Línea"];
-  urgencias: string[] = ["0", "1"];
+  modalidades: string[] = ["PRESENCIAL", "VIRTUAL"];
+  urgencias: boolean[] = [true, false];
   materias!: Materia[]
 
-  constructor(private servicio: ServicioApiService) { 
+  constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
     this.formSolicitud = new FormGroup({
       'materia': new FormControl('', Validators.required),
       'tema': new FormControl('',  Validators.required),
@@ -28,7 +29,10 @@ export class SolicitudAlumnoComponent implements OnInit {
   }
 
   ngOnInit() : void{ 
-    this.materias = this.servicio.getJSON(`http://localhost:8080/API_REST_Tutorias_UAA/materia/obtenerTodas`)
+    //Obtener todas las materias del semestre del alumno
+    this.servicio.getJSON('materia/obtenerPorSemestre/' + this.authservicio.idAlumno).subscribe((res: any)=>{
+      this.materias = res as Materia[];
+    });
   }
 
   enviarSolicitud(): void {
