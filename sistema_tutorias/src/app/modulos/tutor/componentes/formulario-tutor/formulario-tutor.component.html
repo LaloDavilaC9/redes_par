@@ -1,0 +1,61 @@
+<div class="container-fluid p-5">
+    <div class="row justify-content-center">
+        <div class="col col-sm-4">
+            <img class="img-fluid" src="assets/img/logogallo.png" alt="..." />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 class="fw-bold text-center">Registro de Tutor Par</h1>
+        </div>
+    </div>
+    <div class="row mt-5justify-content-center">
+        <div class="col">
+            <h4 class="fw-bold">Materias dominantes para dar asesorías</h4>
+            <form [formGroup]="formMateria" (ngSubmit)="agregarMateria()" class="needs-validation" novalidate>
+                <!--Materias disponibles para el alumno-->
+                <div class="form-group mb-3">
+                    <label class="form-label">Materias</label>
+                    <select class="form-select" formControlName="materia">
+                        <option *ngFor="let materia of materias" [ngValue]="materia">
+                            {{ materia }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-secondary btn-block" [disabled]="!formMateria.valid">
+                        Agregar Materia
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col">
+            <h4 class="fw-bold">Listado</h4>
+            <table class="table table-light table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Semestre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let mat of materias_tutor">
+                        <th>{{mat}}</th>
+                        <th>Materia</th>
+                        <th>Semestre</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col text-center">
+            <button type="submit" class="btn btn-secondary btn-block" [disabled]="materias_tutor.length == 0">
+                Registrarse como Tutor
+            </button>
+        </div>
+    </div>
+</div>

@@ -81,7 +81,7 @@ export class SolicitudTutorComponent implements OnInit {
         ]
       },
 
-      fechaPeticion : "",
+      fechaPeticion : "12/08/2022",
       urgencia : false,
       materiaAsociada : {
           ID : 2,

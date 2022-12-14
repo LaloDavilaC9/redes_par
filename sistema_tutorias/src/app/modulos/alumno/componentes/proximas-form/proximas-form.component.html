@@ -1,0 +1,57 @@
+<div class="modal fade " id="modalDetallesProxima" tabindex="-1" aria-labelledby="modalDetallesProxima"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDetallesNombre">DETALLES DE SOLICITUD</h5>
+            </div>
+            <div class="modal-body">
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos del tutor interesado</h5>
+
+                    <label class="form-label">Nombre</label>
+                    <input type="text"
+                        value="{{solicitudProxima.tutorAsesorias.alumnoAsesorias.nombre.toUpperCase()}} {{solicitudProxima.tutorAsesorias.alumnoAsesorias.apellidoPaterno.toUpperCase()}} {{solicitudProxima.tutorAsesorias.alumnoAsesorias.apellidoMaterno.toUpperCase()}}"
+                        class="form-control" readonly>
+
+                    <label class="form-label">Contacto</label>
+                    <input type="text"
+                        value="{{solicitudProxima.tutorAsesorias.alumnoAsesorias.telefono}} / {{solicitudProxima.tutorAsesorias.alumnoAsesorias.correo.toUpperCase()}}"
+                        class="form-control" readonly>
+                </div>
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos de Asesoría</h5>
+                    <label class="form-label">Materia</label>
+                    <input type="text" value=" {{solicitudProxima.materiaAsociada.nombre.toUpperCase()}}"
+                        class="form-control" readonly>
+
+                    <label class="form-label">Tema</label>
+                    <input type="text" value="{{solicitudProxima.tema.toUpperCase()}}" class="form-control" readonly>
+
+                    <label class="form-label">Descripción de necesidades</label>
+                    <input type="text" value="{{solicitudProxima.descripcion.toUpperCase()}}" class="form-control"
+                        readonly>
+
+                    <label class="form-label">Fecha de solicitud</label>
+                    <input type="text" value="{{solicitudProxima.fechaPeticion}}" class="form-control" readonly>
+
+                    <label class="form-label">Urgencia</label>
+                    <input type="text" value="{{solicitudProxima.urgencia ? 'URGENTE': 'PUEDE ESPERAR'}}"
+                        class="form-control" readonly>
+                </div>
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos de Programación</h5>
+                    <label class="form-label">Fecha</label>
+                    <input type="text" value=" {{solicitudProxima.fechaAsesoria.toUpperCase()}} HRS"
+                        class="form-control" readonly>
+
+                    <label class="form-label">Sitio</label>
+                    <input type="text" value="{{solicitudProxima.sitio}}" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

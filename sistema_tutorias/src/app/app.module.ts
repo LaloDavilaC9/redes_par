@@ -13,6 +13,9 @@ import { BarraNavComponent } from './componentes/barra-nav/barra-nav.component';
 import { TutorModule } from './modulos/tutor/tutor.module';
 import { ModuloRespuestaComponent } from './vistas/modulo-respuesta/modulo-respuesta.component';
 import { ModuloAsesoriaComponent } from './vistas/modulo-asesoria/modulo-asesoria.component';
+import { BarraPrincipalComponent } from './componentes/barra-principal/barra-principal.component';
+import { InicioComponent } from './vistas/inicio/inicio.component';
+import { RegistroTutorComponent } from './vistas/registro-tutor/registro-tutor.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { ModuloAsesoriaComponent } from './vistas/modulo-asesoria/modulo-asesori
     BarraNavComponent,
     ModuloRespuestaComponent,
     ModuloAsesoriaComponent,
+    BarraPrincipalComponent,
+    InicioComponent,
+    RegistroTutorComponent,
   ],
   imports: [
     BrowserModule,

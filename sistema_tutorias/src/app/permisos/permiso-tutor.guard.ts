@@ -14,7 +14,7 @@ export class PermisoTutorGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if (this.servicioAut.sesionActual !== 2) {
-        this.router.navigate(['alumno']);
+        this.router.navigate(['registrotutor']);
       }
       return true;
   }

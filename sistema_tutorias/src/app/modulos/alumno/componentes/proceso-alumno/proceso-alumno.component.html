@@ -1,0 +1,39 @@
+<div *ngFor="let solicitud of solicitudes">
+    <div class="card-body" class="card text-white bg-primary mb-3" *ngIf="mostrarSolicitud(solicitud)">
+        <div class="card-body">
+            <div class="container text-center">
+                <div class="row">
+                    <div *ngIf="solicitud.tutorAsesorias.alumnoAsesorias.nombre !='' else espera" class="col align-self-center">
+                        <h4 class="fst-italic text-muted">Nombre del tutor</h4>
+                        <h4>{{solicitud.tutorAsesorias.alumnoAsesorias.nombre.toUpperCase()}}
+                            {{solicitud.tutorAsesorias.alumnoAsesorias.apellidoPaterno.toUpperCase()}}
+                            {{solicitud.tutorAsesorias.alumnoAsesorias.apellidoMaterno.toUpperCase()}} </h4>
+                            <h4 class="fst-italic text-muted">Contacto</h4>
+                        <h4>{{solicitudProceso.tutorAsesorias.alumnoAsesorias.telefono}} / {{solicitudProceso.tutorAsesorias.alumnoAsesorias.correo.toUpperCase()}}</h4>
+                    </div>
+                    <div class="col align-self-center">
+                        <h3 class="fw-bold text-muted">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</h3>
+                    </div>
+                    <div class="col align-self-center">
+                        <div class="d-grid d-xl-block">
+                            <button class="btn btn-danger btn-lg m-2" (click)="cancelarSolicitud(solicitud)">CANCELAR</button>
+                            <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
+                                data-bs-target="#modalDetallesProceso" (click)="detallesSolicitud(solicitud)">DETALLES</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-proceso-form [solicitudProceso]="solicitudProceso"></app-proceso-form>
+
+<ng-template #espera>
+    <div class="col align-self-center">
+        <h4 class="fst-italic text-muted">Datos del tutor</h4>
+        <h4 class="fw-bold">EN ESPERA</h4>
+        <h4 class="fw-bold">DE</h4>
+        <h4 class="fw-bold">TUTOR</h4>
+    </div>
+</ng-template>

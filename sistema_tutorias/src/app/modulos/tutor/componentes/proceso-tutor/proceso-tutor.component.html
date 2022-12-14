@@ -1,85 +1,80 @@
-<br><br>
 <div *ngFor="let solicitud of solicitudes">
-    <div  class="card text-white bg-primary mb-3"  *ngIf="mostrarSolicitud(solicitud)">
-
-        <div class="card-body" >
-    
-          <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <h4>{{solicitud.alumnoAsesorado.nombre.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </h4>
-                    <h3 class="fw-bold">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</h3>
-                </div>
-                <div class="col" >
-                    <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
-                    <h4 class="text-warning fw-bold" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</h4>
-                    <button class="btn btn-success btn-lg m-2" (click)="aceptar()">CONFIRMAR</button>
-                    <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
-                    <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal" data-bs-target="#modalDetalles" (click)="verMas(solicitud.ID)">VER MÁS</button>
+    <div class="card text-white bg-primary mb-3" *ngIf="mostrarSolicitud(solicitud)">
+        <div class="card-body">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col align-self-center">
+                        <h4 class="fst-italic text-muted">Nombre del alumno</h4>
+                        <h4>{{solicitud.alumnoAsesorado.nombre.toUpperCase()}}
+                            {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}}
+                            {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </h4>
+                        <h4 class="fst-italic text-muted">Materia</h4>
+                        <h4 class="fw-bold">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</h4>
+                    </div>
+                    <div class="col align-self-center">
+                        <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
+                        <h4 class="text-warning fw-bold" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</h4>
+                        <div class="d-grid d-xl-block">
+                            <button class="btn btn-success btn-lg m-2" (click)="aceptar()">CONFIRMAR</button>
+                            <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
+                            <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
+                                data-bs-target="#modalDetalles" (click)="verMas(solicitud.ID)">VER MÁS</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    
     </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade " id="modalDetalles" tabindex="-1" aria-labelledby="modalDetalles" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-      <div class="modal-content ">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalDetallesNombre">DETALLES DE ASESORÍA</h5>
-        </div>
-        <div class="modal-body">
-            <div class="mb-2">
-                <label class="form-label">Materia solicitada</label>
-                <input type="text" value=" {{solicitudDetalle.materiaAsociada.nombre.toUpperCase()}}" class="form-control" readonly >
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDetallesNombre">DETALLES DE ASESORÍA</h5>
+            </div>
+            <div class="modal-body">
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos del alumno asesorado</h5>
 
-                <label class="form-label">Alumno</label>
-                <input type="text" value="{{solicitudDetalle.alumnoAsesorado.nombre.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoMaterno.toUpperCase()}}" class="form-control" readonly >
+                    <label class="form-label">Nombre</label>
+                    <input type="text"
+                        value="{{solicitudDetalle.alumnoAsesorado.nombre.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoMaterno.toUpperCase()}}"
+                        class="form-control" readonly>
+                    
+                    <label class="form-label">Carrera / Semestre</label>
+                    <input type="text"
+                        value="ING. SISTEMAS COMPUTACIONALES / {{solicitudDetalle.alumnoAsesorado.semestre}}"
+                        class="form-control" readonly>
 
-                <label class="form-label">Tema</label>
-                <input type="text" value="{{solicitudDetalle.tema}}" class="form-control"  readonly >
+                    <label class="form-label">Contacto</label>
+                    <input type="text"
+                        value="{{solicitudDetalle.alumnoAsesorado.telefono}} / {{solicitudDetalle.alumnoAsesorado.correo.toUpperCase()}}"
+                        class="form-control" readonly>
+                </div>
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos de Asesoría</h5>
+                    <label class="form-label">Materia</label>
+                    <input type="text" value=" {{solicitudDetalle.materiaAsociada.nombre.toUpperCase()}}"
+                        class="form-control" readonly>
 
-                <label class="form-label">Descripción de necesidades</label>
-                <input type="text" value="{{solicitudDetalle.descripcion}}" class="form-control"  readonly >
+                    <label class="form-label">Tema</label>
+                    <input type="text" value="{{solicitudDetalle.tema.toUpperCase()}}" class="form-control" readonly>
+
+                    <label class="form-label">Descripción de necesidades</label>
+                    <input type="text" value="{{solicitudDetalle.descripcion.toUpperCase()}}" class="form-control" readonly>
+
+                    <label class="form-label">Fecha de solicitud</label>
+                    <input type="text" value="{{solicitudDetalle.fechaPeticion}}" class="form-control" readonly>
+
+                    <label class="form-label">Urgencia</label>
+                    <input type="text" value="{{solicitudDetalle.urgencia ? 'URGENTE': 'PUEDE ESPERAR'}}" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
-        </div>
-      </div>
     </div>
 </div>
-
-
-
-
-
-<!-- <div class="container" *ngFor="let solicitud of solicitudes">
-    <div>
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <p id="nombre">{{solicitud.alumnoAsesorado.nombre.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </p>
-                </div>
-                <div class="col" >
-                    <p class="urgencia" *ngIf="solicitud.urgencia">URGENTE</p>
-                    <p class="urgencia" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</p>
-                </div>
-        </div>
-    
-            <div class="row">
-                <div class="col">
-                    <p id="materia">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</p>
-                </div>
-                <div class="col">
-                    <button class="btn btn-success btn-lg">ACEPTAR</button>
-                    <button class="btn btn-danger btn-lg">CANCELAR</button>
-                    <button class="btn btn-primary btn-lg">VER MÁS</button>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-</div> -->
