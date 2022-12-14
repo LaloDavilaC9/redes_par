@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { solicitud } from 'src/app/modelos/solicitud.model';
 import { Tutor } from 'src/app/modelos/tutor.model';
+import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 
 @Component({
   selector: 'app-solicitud-tutor',
@@ -13,7 +14,7 @@ export class SolicitudTutorComponent implements OnInit {
   tutorActual!: Tutor;
   solicitudDetalle! : solicitud;
 
-  constructor() { 
+  constructor(private servicio: ServicioApiService) { 
 
     this.tutorActual = {
       ID : 1,
@@ -94,7 +95,13 @@ export class SolicitudTutorComponent implements OnInit {
       sitio : "",
       modalidad : "",
       tutoresNoDisponibles : [
-        
+       
+      ]
+
+    }
+
+
+     
         /*{
           ID : 0,
           alumnoAsesorias: {
@@ -121,10 +128,6 @@ export class SolicitudTutorComponent implements OnInit {
             },
           ]
         }*/
-      ]
-
-    }
-
     //inicializamos solicitud detalle con cualquier cosa
     this.solicitudDetalle = solicitud1;
 
@@ -168,6 +171,15 @@ export class SolicitudTutorComponent implements OnInit {
     const indice  = this.solicitudes.map(sol => sol.ID).indexOf(id);
     this.solicitudDetalle = this.solicitudes[indice];
     //alert("La solicitud es: "+this.solicitudDetalle.ID);
+  }
+
+  pedirSolicitud():void{
+    //console.log(this.lado);
+    const urapi = `http://localhost:3000/calculos/`;
+    this.servicio.getJSON(urapi).subscribe((res: any) => {
+      console.log(res);
+      // Una sintaxis alternativa al punto es la siguiente
+    });
   }
 
 }

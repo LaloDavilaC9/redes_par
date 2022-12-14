@@ -15,7 +15,8 @@
                         <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
                         <h4 class="text-warning fw-bold" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</h4>
                         <div class="d-grid d-xl-block">
-                            <button class="btn btn-success btn-lg m-2" (click)="aceptar()">CONFIRMAR</button>
+                            <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
+                                data-bs-target="#modalFechas" (click)="aceptar(solicitud.ID)">CONFIRMAR</button>
                             <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
                                 data-bs-target="#modalDetalles" (click)="verMas(solicitud.ID)">VER MÁS</button>
@@ -27,7 +28,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Detalles -->
 <div class="modal fade " id="modalDetalles" tabindex="-1" aria-labelledby="modalDetalles" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
         <div class="modal-content ">
@@ -74,6 +75,50 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal fechas-->
+<div class="modal fade " id="modalFechas" tabindex="-1" aria-labelledby="modalFechas" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFechasNombre">Agendar asesoría</h5>
+            </div>
+            <div class="modal-body">
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos de la asesoría</h5>
+
+                    <label class="form-label">NOMBRE DEL ALUMNO:</label>
+                    <input type="text"
+                        value="{{solicitudDetalle.alumnoAsesorado.nombre.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoMaterno.toUpperCase()}}"
+                        class="form-control" readonly>
+                    
+                    <label class="form-label">MATERIA SOLICITADA</label>
+                    <input type="text" value=" {{solicitudDetalle.materiaAsociada.nombre.toUpperCase()}}"
+                        class="form-control" readonly>
+                     
+                    <label class="form-label">FECHA: </label>
+                    <input type="date" class="form-control">
+
+                    <label class="form-label">HORA: </label>
+                    <input type="number" class="form-control">
+
+                    <label class="form-label">TIPO DE ASESORIA: </label><br>
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input class="btn-check" type="radio" id="presencial"  name="grupoTipo" value="Presencial" checked>
+                        <label  class="btn btn-outline-primary" for="presencial">Presencial</label>
+                        <input class="btn-check" type="radio" id="virtual"  name="grupoTipo" value="Virtual">
+                        <label class="btn btn-outline-primary" for="virtual">Virtual</label>
+                    </div>
+                </div>
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Programar</button>
             </div>
         </div>
     </div>
