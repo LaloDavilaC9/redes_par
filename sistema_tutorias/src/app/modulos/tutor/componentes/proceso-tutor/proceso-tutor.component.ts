@@ -123,8 +123,9 @@ export class ProcesoTutorComponent implements OnInit {
     //alert("La solicitud es: "+this.solicitudDetalle.ID);
   }
 
-  aceptar() : void{
-
+  aceptar(id : number) : void{
+    const indice  = this.solicitudes.map(sol => sol.ID).indexOf(id);
+    this.solicitudDetalle = this.solicitudes[indice];
   }
 
 }
