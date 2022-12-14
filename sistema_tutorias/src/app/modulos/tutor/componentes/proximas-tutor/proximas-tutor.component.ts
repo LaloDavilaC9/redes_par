@@ -15,9 +15,9 @@ export class ProximasTutorComponent implements OnInit {
   totalAsesorias : Number = 0;
   constructor() { 
     this.tutorActual = {
-      ID : 2,
+      id : 2,
       alumnoAsesorias: {
-        ID : 247101,
+        id : 247101,
           nombre: "Cynthia Maritza",
           apellidoPaterno : "Terán",
           apellidoMaterno : "Carranza",
@@ -29,12 +29,12 @@ export class ProximasTutorComponent implements OnInit {
       },
       materiasAsesorias:[
         {
-          ID : 1,
+          id : 1,
           nombre: "Estructuras de Datos",
           semestre: 3
         },
         {
-          ID : 2,
+          id : 2,
           nombre: "Álgebra Lineal",
           semestre: 2
         },
@@ -44,9 +44,9 @@ export class ProximasTutorComponent implements OnInit {
 
   ngOnInit(): void {
     const solicitud1 : solicitud ={
-      ID : 5,
+      id : 5,
       alumnoAsesorado : {
-        ID : 269314,
+        id : 269314,
         nombre: "ALBERTO",
         apellidoPaterno : "SÁNCHEZ",
         apellidoMaterno : "RODRÍGUEZ",
@@ -58,9 +58,9 @@ export class ProximasTutorComponent implements OnInit {
       },
 
       tutorAsesorias : {
-        ID : 2,
+        id : 2,
         alumnoAsesorias :{
-          ID : 247101,
+          id : 247101,
           nombre: "Cynthia Maritza",
           apellidoPaterno : "Terán",
           apellidoMaterno : "Carranza",
@@ -72,7 +72,7 @@ export class ProximasTutorComponent implements OnInit {
         },
         materiasAsesorias: [
           {
-            ID : 1,
+            id : 1,
             nombre : "Estructuras de datos",
             semestre : 3
           }
@@ -80,8 +80,8 @@ export class ProximasTutorComponent implements OnInit {
       },
       fechaPeticion : "25/01/2022",
       urgencia : false,
-      materiaAsociada : {
-        ID : 1,
+      materiaAsesoria : {
+        id : 1,
         nombre : "Estructuras de datos",
         semestre : 3
       },
@@ -101,7 +101,7 @@ export class ProximasTutorComponent implements OnInit {
 
     
     //La asesoría no es del tutor
-    if(this.tutorActual.ID != solicitudA.tutorAsesorias.ID)
+    if(this.tutorActual.id != solicitudA.tutorAsesorias.id)
       return false;
 
     //La solicitud no tiene fecha para llevarse acabo 
@@ -112,7 +112,7 @@ export class ProximasTutorComponent implements OnInit {
   }
 
   verMas( id : number):void{
-    const indice  = this.solicitudes.map(sol => sol.ID).indexOf(id);
+    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
     this.solicitudDetalle = this.solicitudes[indice];
     //alert("La solicitud es: "+this.solicitudDetalle.ID);
   }
