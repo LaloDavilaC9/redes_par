@@ -4,15 +4,15 @@
     <!--ID del alumno-->
     <div class="form-group mb-3">
       <label class="form-label">ID</label>
-      <input type="number" class="form-control" formControlName="ID" 
-      [ngClass]="formRegistroAlumno.controls['ID'].valid ? 'is-valid': '' + formRegistroAlumno.controls['ID'].invalid && formRegistroAlumno.controls['ID'].touched? 'is-invalid': ''"
+      <input type="number" class="form-control" formControlName="id" 
+      [ngClass]="formRegistroAlumno.controls['id'].valid ? 'is-valid': '' + formRegistroAlumno.controls['id'].invalid && formRegistroAlumno.controls['id'].touched? 'is-invalid': ''"
       placeholder="Escriba un ID"/>
       <div class="invalid-feedback" 
-      *ngIf=" formRegistroAlumno.controls['ID'].invalid && formRegistroAlumno.controls['ID'].touched ? 'is-invalid': ''">
-        <div *ngIf="formRegistroAlumno.get(['ID'])?.errors?.['pattern']">
+      *ngIf=" formRegistroAlumno.controls['id'].invalid && formRegistroAlumno.controls['id'].touched ? 'is-invalid': ''">
+        <div *ngIf="formRegistroAlumno.get(['id'])?.errors?.['pattern']">
           El ID debe ser un número de 6 dígitos
         </div>
-        <div *ngIf="formRegistroAlumno.get(['ID'])?.errors?.['required']">
+        <div *ngIf="formRegistroAlumno.get(['id'])?.errors?.['required']">
           Debe ingresar un ID.
         </div>
       </div>

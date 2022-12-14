@@ -17,17 +17,6 @@ export class ProcesoAlumnoComponent implements OnInit {
   alumnoActual!: Alumno;
   totalAsesorias : Number = 0;
   constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
-    /*this.alumnoActual = {
-      ID: 226582,
-      nombre: "Cynthia Maritza",
-      apellidoPaterno: "Terán",
-      apellidoMaterno: "Carranza",
-      semestre: 7,
-      telefono: "4491808868",
-      correo: "al226582@edu.uaa.mx",
-      clave: "1234",
-      imagen: ""
-    };*/
   }
 
   ngOnInit(): void {
@@ -45,7 +34,7 @@ export class ProcesoAlumnoComponent implements OnInit {
   mostrarSolicitud(solicitud : solicitud) : boolean{
 
     //La solicitud no es del alumno
-    if(this.alumnoActual.ID != solicitud.alumnoAsesorado.ID)
+    if(this.alumnoActual.id != solicitud.alumnoAsesorado.id)
       return false;
 
     //La solicitud tiene fecha para llevarse a cabo

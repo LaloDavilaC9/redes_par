@@ -14,7 +14,7 @@ export class FormularioAlumnoComponent implements OnInit {
 
   constructor() {
     this.formRegistroAlumno = new FormGroup({
-      'ID': new FormControl('', [Validators.required, Validators.pattern("[0-9]{6}")]),
+      'id': new FormControl('', [Validators.required, Validators.pattern("[0-9]{6}")]),
       'nombre': new FormControl('', [Validators.required]),
       'apellidoPaterno': new FormControl(''),
       'apellidoMaterno': new FormControl(''),

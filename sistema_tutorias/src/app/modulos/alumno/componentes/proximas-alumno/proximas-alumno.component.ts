@@ -17,7 +17,7 @@ export class ProximasAlumnoComponent implements OnInit {
   totalAsesorias : Number = 0;
   constructor() { 
     this.alumnoActual = {
-      ID: 226582,
+      id: 226582,
       nombre: "Cynthia Maritza",
       apellidoPaterno: "Terán",
       apellidoMaterno: "Carranza",
@@ -31,9 +31,9 @@ export class ProximasAlumnoComponent implements OnInit {
 
   ngOnInit(): void {
     const solicitud1 : solicitud ={
-      ID : 5,
+      id : 5,
       alumnoAsesorado : {
-        ID: 226582,
+        id: 226582,
         nombre: "Cynthia Maritza",
         apellidoPaterno: "Terán",
         apellidoMaterno: "Carranza",
@@ -45,9 +45,9 @@ export class ProximasAlumnoComponent implements OnInit {
       },
 
       tutorAsesorias : {
-        ID : 2,
+        id : 2,
         alumnoAsesorias :{
-          ID : 247101,
+          id : 247101,
           nombre: "",
           apellidoPaterno : "Terán",
           apellidoMaterno : "Carranza",
@@ -59,7 +59,7 @@ export class ProximasAlumnoComponent implements OnInit {
         },
         materiasAsesorias: [
           {
-            ID : 1,
+            id : 1,
             nombre : "Estructuras de datos",
             semestre : 3
           }
@@ -67,8 +67,8 @@ export class ProximasAlumnoComponent implements OnInit {
       },
       fechaPeticion : "25/01/2022",
       urgencia : false,
-      materiaAsociada : {
-        ID : 1,
+      materiaAsesoria : {
+        id : 1,
         nombre : "Estructuras de datos",
         semestre : 3
       },
@@ -90,7 +90,7 @@ export class ProximasAlumnoComponent implements OnInit {
   mostrarSolicitud(solicitud : solicitud) : boolean{
 
     //La solicitud  no es del del alumno
-    if(this.alumnoActual.ID != solicitud.alumnoAsesorado.ID)
+    if(this.alumnoActual.id != solicitud.alumnoAsesorado.id)
       return false;
 
     //La solicitud no tiene fecha de asesoria
