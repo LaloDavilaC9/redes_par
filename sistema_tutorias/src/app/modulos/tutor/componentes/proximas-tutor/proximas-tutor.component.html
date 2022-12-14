@@ -9,7 +9,7 @@
                             {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}}
                             {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </h4>
                         <h4 class="fst-italic text-muted">Materia</h4>
-                        <h4 class="fw-bold">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</h4>
+                        <h4 class="fw-bold">{{solicitud.materiaAsesoria.nombre.toUpperCase()}}</h4>
                     </div>
                     <div class="col align-self-center">
                         <h3 class="text-muted fw-bold">PROGRAMADA</h3>
@@ -20,7 +20,7 @@
                         <div class="d-grid d-xl-block">
                             <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
-                                data-bs-target="#modalDetalles" (click)="verMas(solicitud.ID)">DETALLES</button>
+                                data-bs-target="#modalDetalles" (click)="verMas(solicitud.id)">DETALLES</button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="my-2">
                     <h5 class="fw-bold">Datos de Asesoría</h5>
                     <label class="form-label">Materia</label>
-                    <input type="text" value=" {{solicitudDetalle.materiaAsociada.nombre.toUpperCase()}}"
+                    <input type="text" value=" {{solicitudDetalle.materiaAsesoria.nombre.toUpperCase()}}"
                         class="form-control" readonly>
 
                     <label class="form-label">Tema</label>

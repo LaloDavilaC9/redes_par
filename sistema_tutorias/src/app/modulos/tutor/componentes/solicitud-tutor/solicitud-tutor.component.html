@@ -9,7 +9,7 @@
                             {{solicitud.alumnoAsesorado.apellidoPaterno.toUpperCase()}}
                             {{solicitud.alumnoAsesorado.apellidoMaterno.toUpperCase()}} </h4>
                         <h4 class="fst-italic text-muted">Materia</h4>
-                        <h4 class="fw-bold">{{solicitud.materiaAsociada.nombre.toUpperCase()}}</h4>
+                        <h4 class="fw-bold">{{solicitud.materiaAsesoria.nombre.toUpperCase()}}</h4>
                     </div>
                     <div class="col align-self-center">
                         <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
@@ -18,7 +18,7 @@
                             <button class="btn btn-success btn-lg m-2" (click)="aceptar()">ACEPTAR</button>
                             <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
-                                data-bs-target="#modalDetalles" (click)="verMas(solicitud.ID)">VER MÁS</button>
+                                data-bs-target="#modalDetalles" (click)="verMas(solicitud.id)">VER MÁS</button>
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="my-2">
                     <h5 class="fw-bold">Datos de Asesoría</h5>
                     <label class="form-label">Materia</label>
-                    <input type="text" value=" {{solicitudDetalle.materiaAsociada.nombre.toUpperCase()}}"
+                    <input type="text" value=" {{solicitudDetalle.materiaAsesoria.nombre.toUpperCase()}}"
                         class="form-control" readonly>
 
                     <label class="form-label">Tema</label>
