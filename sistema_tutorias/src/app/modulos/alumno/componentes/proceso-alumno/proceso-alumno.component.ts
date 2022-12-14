@@ -30,6 +30,8 @@ export class ProcesoAlumnoComponent implements OnInit {
     this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.authservicio.idAlumno).subscribe((res: any)=>{
       this.solicitudes = res as solicitud[];
     });
+
+    
   }
 
   //Función que filtra que solicitues se muestran

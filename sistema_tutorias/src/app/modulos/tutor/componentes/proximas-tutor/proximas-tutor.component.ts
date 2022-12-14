@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { solicitud } from 'src/app/modelos/solicitud.model';
 import { Tutor } from 'src/app/modelos/tutor.model';
+import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
+import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 
 @Component({
   selector: 'app-proximas-tutor',
@@ -10,11 +12,56 @@ import { Tutor } from 'src/app/modelos/tutor.model';
 export class ProximasTutorComponent implements OnInit {
 
   solicitudes : solicitud[] = []
-  tutorActual!: Tutor;
+  //tutorActual!: Tutor;
   solicitudDetalle! : solicitud;
   totalAsesorias : Number = 0;
-  constructor() { 
-    this.tutorActual = {
+  constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
+    
+  }
+
+  ngOnInit(): void {
+    //inicializamos solicitud detalle con cualquier cosa
+    this.solicitudDetalle = new solicitud;
+    this.cargarSolicitudes();
+  }
+
+  mostrarSolicitud(solicitudA : solicitud) : boolean{
+
+    
+    //La asesoría no es del tutor
+    if(this.authservicio.tutorActual.id != solicitudA.tutorAsesorias.id)
+      return false;
+
+    //La solicitud no tiene fecha para llevarse acabo 
+    if(solicitudA.fechaAsesoria == "")
+      return false;
+
+    return true;
+  }
+
+  verMas( id : number):void{
+    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
+    this.solicitudDetalle = this.solicitudes[indice];
+    //alert("La solicitud es: "+this.solicitudDetalle.ID);
+  }
+
+  aceptar() : void{
+
+  }
+
+  cargarSolicitudes():void{
+    const urapi = `solicitud/obtenerTodas`;
+    //Obtener todas las solicitudes
+    this.servicio.getJSON('solicitud/obtenerTodas').subscribe((res: any)=>{
+      this.solicitudes = res as solicitud[];
+    });
+  }
+
+
+}
+
+
+/*this.tutorActual = {
       id : 2,
       alumnoAsesorias: {
         id : 247101,
@@ -39,11 +86,10 @@ export class ProximasTutorComponent implements OnInit {
           semestre: 2
         },
       ]
-    };
-  }
+    }; */
 
-  ngOnInit(): void {
-    const solicitud1 : solicitud ={
+
+/*const solicitud1 : solicitud ={
       id : 5,
       alumnoAsesorado : {
         id : 269314,
@@ -91,37 +137,4 @@ export class ProximasTutorComponent implements OnInit {
       sitio : "BIBLIOTECA",
       modalidad : "Presencial",
       tutoresNoDisponibles : []
-    }
-    //inicializamos solicitud detalle con cualquier cosa
-    this.solicitudDetalle = solicitud1;
-    this.solicitudes.push(solicitud1);
-  }
-
-  mostrarSolicitud(solicitudA : solicitud) : boolean{
-
-    
-    //La asesoría no es del tutor
-    if(this.tutorActual.id != solicitudA.tutorAsesorias.id)
-      return false;
-
-    //La solicitud no tiene fecha para llevarse acabo 
-    if(solicitudA.fechaAsesoria == "")
-      return false;
-
-    return true;
-  }
-
-  verMas( id : number):void{
-    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
-    this.solicitudDetalle = this.solicitudes[indice];
-    //alert("La solicitud es: "+this.solicitudDetalle.ID);
-  }
-
-  aceptar() : void{
-
-  }
-
-
-
-
-}
+    }*/

@@ -21,7 +21,7 @@ export class AutentificacionService {
   idAlumno: number = 0;
   idTutor : number = 0;
   autorizacion: boolean = false; 
-
+  tutores : Tutor[] = [];
 
   constructor(public router: Router,private servicio: ServicioApiService) {
   }
@@ -30,6 +30,19 @@ export class AutentificacionService {
   asignarDatosAlumno(id: number){
     this.idAlumno = id;
     //Obtener id del tutor
+    const urapi = `tutor/obtenerTodos`;
+    //Obtener todas las solicitudes
+    this.servicio.getJSON('solicitud/obtenerTodas').subscribe((res: any)=>{
+      this.tutores = res as Tutor[];
+       //Se encuentra el ID del tutor
+       this.tutores.forEach(element => {
+        if(element.alumnoAsesorias.id == this.idAlumno){
+          this.tutorActual = element;
+        }
+       })
+          
+    });
+
   }
 
 

@@ -47,9 +47,68 @@ export class SolicitudTutorComponent implements OnInit {
 
   ngOnInit(): void {
 
+  
+    //inicializamos solicitud detalle con cualquier cosa
+    this.solicitudDetalle = new solicitud;
     this.pedirSolicitud()
+  
+  }
 
-    var solicitud1 : solicitud ={
+  mostrarSolicitud(solicitudA : solicitud) : boolean{
+
+    //Esta asesoría no corresponde al tutor
+    if(this.tutorActual.id != solicitudA.tutorAsesorias.id)
+      return false;
+
+    //El tutor no da la materia que pide la solicitud
+    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.id == solicitudA.materiaAsesoria.id).length == 0)
+      return false;
+
+
+    //El tutor ya rechazó la solicitud alguna vez
+    if(solicitudA.tutoresNoDisponibles.filter(elemento => elemento.id == this.tutorActual.id).length != 0)
+      return false;
+    
+
+    //Si un tutor ya aceptó, no lo muestra
+    if(solicitudA.tutorAsesorias.id != 0)
+      return false;
+
+    
+    //Rectificamos que no haya una fecha programada
+    if(solicitudA.fechaAsesoria != "")
+      return false;
+
+   
+    return true;
+  }
+
+  aceptar() : void{
+
+  }
+
+  verMas( id : number):void{
+    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
+    this.solicitudDetalle = this.solicitudes[indice];
+    //alert("La solicitud es: "+this.solicitudDetalle.ID);
+  }
+
+  pedirSolicitud():void{
+    const urapi = `solicitud/obtenerTodas`;
+    //Obtener todas las solicitudes
+    this.servicio.getJSON('solicitud/obtenerTodas').subscribe((res: any)=>{
+      this.solicitudes = res as solicitud[];
+    });
+
+  }
+
+}
+
+
+
+
+/*
+ var solicitud1 : solicitud ={
       id : 5,
       alumnoAsesorado : {
         id : 269314,
@@ -100,10 +159,30 @@ export class SolicitudTutorComponent implements OnInit {
        
       ]
 
-    }
+    }*/
 
 
-     
+/*{ID : 247101,
+        alumnoAsesorias :{
+          ID : 247101,
+          nombre: "Cynthia Maritza",
+          apellidoPaterno : "Terán",
+          apellidoMaterno : "Carranza",
+          semestre : 7,
+          telefono : "4499205022",
+          correo : "cynthia@gmail.com",
+          clave : "1234",
+          imagen : ""
+        },
+        materiasAsesorias: [
+          {
+            ID : 1,
+            nombre : "Estructuras de datos",
+            semestre : 3
+          }
+        ]*/
+
+
         /*{
           ID : 0,
           alumnoAsesorias: {
@@ -130,78 +209,3 @@ export class SolicitudTutorComponent implements OnInit {
             },
           ]
         }*/
-    //inicializamos solicitud detalle con cualquier cosa
-    this.solicitudDetalle = solicitud1;
-
-    this.solicitudes.push(solicitud1);
-    solicitud1.id = 6;
-    this.solicitudes.push(solicitud1);
-    this.solicitudes.push(solicitud1);
-    
-  }
-
-  mostrarSolicitud(solicitudA : solicitud) : boolean{
-
-    //El tutor no da la materia que pide la solicitud
-    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.id == solicitudA.materiaAsesoria.id).length == 0)
-      return false;
-
-
-    //El tutor ya rechazó la solicitud alguna vez
-    if(solicitudA.tutoresNoDisponibles.filter(elemento => elemento.id == this.tutorActual.id).length != 0)
-      return false;
-    
-
-    //Si un tutor ya aceptó, no lo muestra
-    if(solicitudA.tutorAsesorias.id != 0)
-      return false;
-
-    
-    //Rectificamos que no haya una fecha programada
-    if(solicitudA.fechaAsesoria != "")
-      return false;
-
-   
-    return true;
-  }
-
-  aceptar() : void{
-
-  }
-
-  verMas( id : number):void{
-    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
-    this.solicitudDetalle = this.solicitudes[indice];
-    //alert("La solicitud es: "+this.solicitudDetalle.ID);
-  }
-
-  pedirSolicitud():void{
-    const urapi = `http://localhost:8080/API_REST_Tutorias_UAA/materia/obtenerTodas`;
-  }
-
-}
-
-
-
-
-
-
-/*{ID : 247101,
-        alumnoAsesorias :{
-          ID : 247101,
-          nombre: "Cynthia Maritza",
-          apellidoPaterno : "Terán",
-          apellidoMaterno : "Carranza",
-          semestre : 7,
-          telefono : "4499205022",
-          correo : "cynthia@gmail.com",
-          clave : "1234",
-          imagen : ""
-        },
-        materiasAsesorias: [
-          {
-            ID : 1,
-            nombre : "Estructuras de datos",
-            semestre : 3
-          }
-        ]*/
