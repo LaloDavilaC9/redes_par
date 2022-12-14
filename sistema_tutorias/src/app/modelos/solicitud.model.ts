@@ -8,7 +8,7 @@ export interface solicitud{
     tutorAsesorias : Tutor;
     fechaPeticion : string;
     urgencia : boolean;
-    materiaAsociada : Materia;
+    materiaAsesoria : Materia;
     tema : string;
     descripcion : string;
     fechaAsesoria : string;

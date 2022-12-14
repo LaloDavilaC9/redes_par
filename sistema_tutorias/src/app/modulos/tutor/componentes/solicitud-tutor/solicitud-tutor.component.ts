@@ -17,9 +17,9 @@ export class SolicitudTutorComponent implements OnInit {
   constructor(private servicio: ServicioApiService) { 
 
     this.tutorActual = {
-      ID : 1,
+      id : 1,
       alumnoAsesorias: {
-        ID: 0,
+        id: 0,
         nombre:  "",
         apellidoPaterno:  "",
         apellidoMaterno: "",
@@ -50,9 +50,9 @@ export class SolicitudTutorComponent implements OnInit {
     this.pedirSolicitud()
 
     var solicitud1 : solicitud ={
-      ID : 5,
+      id : 5,
       alumnoAsesorado : {
-        ID : 269314,
+        id : 269314,
         nombre: "LALO",
         apellidoPaterno : "DAVILA",
         apellidoMaterno : "CAMPOS",
@@ -63,9 +63,9 @@ export class SolicitudTutorComponent implements OnInit {
         imagen : ""
       },
       tutorAsesorias : {
-        ID : 0,
+        id : 0,
         alumnoAsesorias: {
-          ID: 0,
+          id: 0,
           nombre:  "",
           apellidoPaterno:  "",
           apellidoMaterno: "",
@@ -134,7 +134,7 @@ export class SolicitudTutorComponent implements OnInit {
     this.solicitudDetalle = solicitud1;
 
     this.solicitudes.push(solicitud1);
-    solicitud1.ID = 6;
+    solicitud1.id = 6;
     this.solicitudes.push(solicitud1);
     this.solicitudes.push(solicitud1);
     
@@ -148,12 +148,12 @@ export class SolicitudTutorComponent implements OnInit {
 
 
     //El tutor ya rechazó la solicitud alguna vez
-    if(solicitudA.tutoresNoDisponibles.filter(elemento => elemento.ID == this.tutorActual.ID).length != 0)
+    if(solicitudA.tutoresNoDisponibles.filter(elemento => elemento.id == this.tutorActual.id).length != 0)
       return false;
     
 
     //Si un tutor ya aceptó, no lo muestra
-    if(solicitudA.tutorAsesorias.ID != 0)
+    if(solicitudA.tutorAsesorias.id != 0)
       return false;
 
     
@@ -170,7 +170,7 @@ export class SolicitudTutorComponent implements OnInit {
   }
 
   verMas( id : number):void{
-    const indice  = this.solicitudes.map(sol => sol.ID).indexOf(id);
+    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
     this.solicitudDetalle = this.solicitudes[indice];
     //alert("La solicitud es: "+this.solicitudDetalle.ID);
   }
