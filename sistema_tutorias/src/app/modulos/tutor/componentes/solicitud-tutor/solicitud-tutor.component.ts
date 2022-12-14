@@ -86,7 +86,7 @@ export class SolicitudTutorComponent implements OnInit {
 
       fechaPeticion : "12/08/2022",
       urgencia : false,
-      materiaAsociada : {
+      materiaAsesoria : {
           id : 2,
           nombre: "Álgebra Lineal",
           semestre: 2
@@ -143,7 +143,7 @@ export class SolicitudTutorComponent implements OnInit {
   mostrarSolicitud(solicitudA : solicitud) : boolean{
 
     //El tutor no da la materia que pide la solicitud
-    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.id == solicitudA.materiaAsociada.id).length == 0)
+    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.id == solicitudA.materiaAsesoria.id).length == 0)
       return false;
 
 
