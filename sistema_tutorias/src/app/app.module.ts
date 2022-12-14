@@ -16,6 +16,8 @@ import { ModuloAsesoriaComponent } from './vistas/modulo-asesoria/modulo-asesori
 import { BarraPrincipalComponent } from './componentes/barra-principal/barra-principal.component';
 import { InicioComponent } from './vistas/inicio/inicio.component';
 import { RegistroTutorComponent } from './vistas/registro-tutor/registro-tutor.component';
+import { ServicioApiService } from './servicios/servicio-api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,16 +27,17 @@ import { RegistroTutorComponent } from './vistas/registro-tutor/registro-tutor.c
     ModuloAsesoriaComponent,
     BarraPrincipalComponent,
     InicioComponent,
-    RegistroTutorComponent,
+    RegistroTutorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     AutentificacionModule,
     AlumnoModule,
     TutorModule
   ],
-  providers: [],
+  providers: [ServicioApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

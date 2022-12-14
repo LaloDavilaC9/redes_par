@@ -31,12 +31,12 @@ export class SolicitudTutorComponent implements OnInit {
       },
       materiasAsesorias:[
         {
-          ID : 1,
+          id : 1,
           nombre: "Estructuras de Datos",
           semestre: 3
         },
         {
-          ID : 2,
+          id : 2,
           nombre: "Álgebra Lineal",
           semestre: 2
         },
@@ -46,6 +46,8 @@ export class SolicitudTutorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.pedirSolicitud()
 
     var solicitud1 : solicitud ={
       ID : 5,
@@ -75,7 +77,7 @@ export class SolicitudTutorComponent implements OnInit {
         },
         materiasAsesorias:[
           {
-            ID : 0,
+            id : 0,
             nombre: "",
             semestre: 0
           },
@@ -85,7 +87,7 @@ export class SolicitudTutorComponent implements OnInit {
       fechaPeticion : "12/08/2022",
       urgencia : false,
       materiaAsociada : {
-          ID : 2,
+          id : 2,
           nombre: "Álgebra Lineal",
           semestre: 2
       },
@@ -141,7 +143,7 @@ export class SolicitudTutorComponent implements OnInit {
   mostrarSolicitud(solicitudA : solicitud) : boolean{
 
     //El tutor no da la materia que pide la solicitud
-    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.ID == solicitudA.materiaAsociada.ID).length == 0)
+    if(this.tutorActual.materiasAsesorias.filter(elemento => elemento.id == solicitudA.materiaAsociada.id).length == 0)
       return false;
 
 
@@ -174,12 +176,7 @@ export class SolicitudTutorComponent implements OnInit {
   }
 
   pedirSolicitud():void{
-    //console.log(this.lado);
-    const urapi = `http://localhost:3000/calculos/`;
-    this.servicio.getJSON(urapi).subscribe((res: any) => {
-      console.log(res);
-      // Una sintaxis alternativa al punto es la siguiente
-    });
+    const urapi = `http://localhost:8080/API_REST_Tutorias_UAA/materia/obtenerTodas`;
   }
 
 }

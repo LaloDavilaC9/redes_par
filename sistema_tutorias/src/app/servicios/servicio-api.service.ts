@@ -6,10 +6,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServicioApiService {
 
+  base: string = "http://10.10.10.15:8080/API_REST_Tutorias_UAA/";
+
   constructor(public httpClient: HttpClient) { }
 
-  getJSON(url: string) {
-    return this.httpClient.get(url);
+
+  //Método para obtener los datos
+  getJSON(url: string) : any{
+    const urlpath = this.base + url;
+    this.httpClient.get(urlpath).subscribe((res: any) => {
+      console.log(res);
+      return res
+    });
   }
 
   

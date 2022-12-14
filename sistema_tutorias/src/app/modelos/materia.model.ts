@@ -1,5 +1,5 @@
-export interface Materia {
-  ID: number;
-  nombre: string;
-  semestre: number;
+export class Materia {
+  id: number = 0;
+  nombre: string = "";
+  semestre: number = 0;
 }

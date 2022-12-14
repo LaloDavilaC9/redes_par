@@ -3,7 +3,7 @@ import { Materia } from "./materia.model";
 import { Tutor } from "./tutor.model";
 
 export interface solicitud{
-    ID : number;
+    id : number;
     alumnoAsesorado : Alumno;
     tutorAsesorias : Tutor;
     fechaPeticion : string;

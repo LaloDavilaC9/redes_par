@@ -1,10 +1,10 @@
 export interface solicitudSimplificada {
-  ID: number;
+  id: number;
   alumnoAsesorado: number;
   tutorAsesorias: number;
   fechaPeticion: string;
   urgencia: boolean;
-  materiaAsociada: number;
+  materiaAsesoria: number;
   tema: string;
   descripcion: string;
   fechaAsesoria: string;

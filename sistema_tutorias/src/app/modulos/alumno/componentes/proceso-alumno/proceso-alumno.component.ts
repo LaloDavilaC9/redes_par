@@ -1,6 +1,8 @@
 import { Component,OnInit} from '@angular/core';
 import { Alumno } from 'src/app/modelos/alumno.model';
 import { solicitud } from 'src/app/modelos/solicitud.model';
+import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
+import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 
 @Component({
   selector: 'app-proceso-alumno',
@@ -14,8 +16,8 @@ export class ProcesoAlumnoComponent implements OnInit {
   solicitudes : solicitud[] = []
   alumnoActual!: Alumno;
   totalAsesorias : Number = 0;
-  constructor() { 
-    this.alumnoActual = {
+  constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
+    /*this.alumnoActual = {
       ID: 226582,
       nombre: "Cynthia Maritza",
       apellidoPaterno: "Terán",
@@ -25,60 +27,13 @@ export class ProcesoAlumnoComponent implements OnInit {
       correo: "al226582@edu.uaa.mx",
       clave: "1234",
       imagen: ""
-    };
+    };*/
   }
 
   ngOnInit(): void {
-    const solicitud1 : solicitud ={
-      ID : 5,
-      alumnoAsesorado : {
-        ID: 226582,
-        nombre: "Cynthia Maritza",
-        apellidoPaterno: "Terán",
-        apellidoMaterno: "Carranza",
-        semestre: 7,
-        telefono: "4491808868",
-        correo: "al226582@edu.uaa.mx",
-        clave: "1234",
-        imagen: ""
-      },
-
-      tutorAsesorias : {
-        ID : 2,
-        alumnoAsesorias :{
-          ID : 247101,
-          nombre: "",
-          apellidoPaterno : "Terán",
-          apellidoMaterno : "Carranza",
-          semestre : 7,
-          telefono : "4499205022",
-          correo : "cynthia@gmail.com",
-          clave : "1234",
-          imagen : ""
-        },
-        materiasAsesorias: [
-          {
-            ID : 1,
-            nombre : "Estructuras de datos",
-            semestre : 3
-          }
-        ]
-      },
-      fechaPeticion : "25/01/2022",
-      urgencia : false,
-      materiaAsociada : {
-        ID : 1,
-        nombre : "Estructuras de datos",
-        semestre : 3
-      },
-      tema : "Ciclos",
-      descripcion: "No le entiendo a mi profe",
-      fechaAsesoria : "",
-      sitio : "",
-      modalidad : "",
-      tutoresNoDisponibles : []
-    }
-    this.solicitudes.push(solicitud1);
+    this.alumnoActual = this.servicio.getJSON('alumno/obtener/' + this.authservicio.alumno.id);
+    this.solicitudes = this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.authservicio.alumno.id)
+    
 
     //Inicializar variable para detalles de solicitud
     this.establecerSProceso();
