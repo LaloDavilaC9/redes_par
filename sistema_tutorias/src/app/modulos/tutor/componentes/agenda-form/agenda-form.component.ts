@@ -51,4 +51,13 @@ export class AgendaFormComponent implements OnInit {
     });
   }
 
+  clima(){
+    var url = "https://api.openweathermap.org/data/3.0/onecall?lat={21.8818}&lon={-102.291}&exclude={part}&appid={5a211b4435ff9bbdd016d00dcd132c95}";
+    this.servicio.getJSON(url).subscribe((res: any)=>{
+      console.log(res);
+    });
+  }
+
+
+
 }
