@@ -4,6 +4,7 @@ import { Alumno } from 'src/app/modelos/alumno.model';
 import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 import { AutentificacionService } from '../../servicios/autentificacion.service';
 import { Router } from '@angular/router';
+import { Tutor } from 'src/app/modelos/tutor.model';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,6 +16,7 @@ export class InicioSesionComponent implements OnInit {
   id: number = 0;
   contrasena: string = '';
   alumnoActual: Alumno = new Alumno()
+  tutoresActuales: Tutor[] = []
 
   constructor(
     private servicio: ServicioApiService,
@@ -37,7 +39,7 @@ export class InicioSesionComponent implements OnInit {
     // Recuperar datos de el id ingresado
     this.servicioAutentificacion.idAlumno = this.formInicioSesion.get('ID')?.value;
 
-    //Encriptar contraseña
+    //Desencriptar contraseña
     /*const md5 = new Md5();
     const enc = md5.appendStr(this.formInicioSesion.get('contrasena')?.value).end;
 
@@ -46,19 +48,30 @@ export class InicioSesionComponent implements OnInit {
       console.log(this.contrasena)
     }*/
 
-    //Buscar el usuario
+    //Buscar el usuario como alumno
     this.servicio.getJSON('alumno/obtener/' + this.servicioAutentificacion.idAlumno).subscribe((res: any)=>{
       this.alumnoActual = res as Alumno;
+      this.servicioAutentificacion.alumnoActual = this.alumnoActual;
       //Comparar contraseña
-
-      console.log("Contraseña del alumno " + this.alumnoActual.clave);
-      console.log("Nombre del alumno " + this.alumnoActual.nombre);
       if (this.servicioAutentificacion.idAlumno == this.alumnoActual.id) {//this.contrasena == this.alumnoActual.clave
         this.servicioAutentificacion.autorizacion = true;
-        this.router.navigate(['alumno']);
-    
       }
     });
+
+    //Buscar el usuario como tutor
+    this.servicio.getJSON('tutor/obtenerTodos').subscribe((res: any)=>{
+      this.tutoresActuales = res as Tutor[];
+       //Se encuentra el ID del tutor
+       this.tutoresActuales.forEach(element => {
+        if(element.alumnoAsesorias.id == this.servicioAutentificacion.idAlumno){
+          this.servicioAutentificacion.idTutor = element.id;
+          this.servicioAutentificacion.tutorActual = element;
+        }
+       })
+    });
+
+    //Navegar hacia alumno
+    this.router.navigate(['alumno']);
     
   }
 }

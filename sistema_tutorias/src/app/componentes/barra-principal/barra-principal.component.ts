@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
 
 @Component({
   selector: 'app-barra-principal',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarraPrincipalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private aservice: AutentificacionService) { }
 
   ngOnInit(): void {
+  }
+
+  cerrar(){
+    this.aservice.cerrarSesion()
   }
 
 }

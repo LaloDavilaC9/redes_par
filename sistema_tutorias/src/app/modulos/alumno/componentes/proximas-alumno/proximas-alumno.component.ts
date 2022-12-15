@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Alumno } from 'src/app/modelos/alumno.model';
+import { Respuesta } from 'src/app/modelos/respuesta.model';
 import { solicitud } from 'src/app/modelos/solicitud.model';
 import { Tutor } from 'src/app/modelos/tutor.model';
 import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
@@ -18,17 +20,13 @@ export class ProximasAlumnoComponent implements OnInit {
   alumnoActual!: Alumno;
   totalAsesorias : Number = 0;
 
-  constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
+  constructor(private servicio: ServicioApiService, private aservicio: AutentificacionService, private router: Router) { 
   }
 
   ngOnInit(): void {
-    //Obtener los datos del alumno
-    this.servicio.getJSON('alumno/obtener/' + this.authservicio.idAlumno).subscribe((res: any)=>{
-      this.alumnoActual = res as Alumno;
-    });
 
     //Obtener los datos de las asesorias que involucran al alumno
-    this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.authservicio.idAlumno).subscribe((res: any)=>{
+    this.servicio.getJSON('solicitud/obtenerPorAlumno/'+ this.aservicio.alumnoActual.id).subscribe((res: any)=>{
       this.solicitudes = res as solicitud[];
     });
   }
@@ -37,18 +35,24 @@ export class ProximasAlumnoComponent implements OnInit {
   //Para Proximas módulo solicitudes
   mostrarSolicitud(solicitud : solicitud) : boolean{
 
-    //La solicitud  no es del del alumno
-    if(this.alumnoActual.id != solicitud.alumnoAsesorado.id)
-      return false;
-
-    //La solicitud no tiene fecha de asesoria
+    //La solicitud no tiene fecha de asesoria, cuando esta en proxima debe tener fecha ... entonces se rechaza
     if(solicitud.fechaAsesoria == "")
       return false;
 
     return true;
   }
 
-  cancelarSolicitud(solicitud: solicitud){
+  //Función para eliminar una solicitud
+  cancelarSolicitud(solicitudP: solicitud){
+    //Efectuar api delete
+    this.servicio.eliminar('solicitud/eliminar', solicitudP.id).subscribe((res: any) => {
+      const respuesta: Respuesta = res as Respuesta
+      if(respuesta.estado){//De ser exitoso recarga-refresca
+        //this.router.navigate(['alumno/proximas']);
+        this.router.navigate(['alumno']);
+      }
+    })
+
   }
 
   detallesSolicitud(solicitudP: solicitud): void {

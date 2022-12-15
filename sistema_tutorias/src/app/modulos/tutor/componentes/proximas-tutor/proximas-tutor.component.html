@@ -13,12 +13,12 @@
                     </div>
                     <div class="col align-self-center">
                         <h3 class="text-muted fw-bold">PROGRAMADA</h3>
-                        <h4 class="text-secundary fw-bold">{{solicitud.fechaAsesoria}} hrs.</h4>
+                        <h4 class="text-secundary fw-bold">{{solicitud.fechaAsesoria}} HRS.</h4>
                         <h4 class="text-secundary fw-bold">{{solicitud.sitio}}</h4>
                     </div>
                     <div class="col align-self-center">
                         <div class="d-grid d-xl-block">
-                            <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
+                            <button class="btn btn-danger btn-lg m-2" (click)="cancelar(solicitud.id)">CANCELAR</button>
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
                                 data-bs-target="#modalDetalles" (click)="verMas(solicitud.id)">DETALLES</button>
                         </div>

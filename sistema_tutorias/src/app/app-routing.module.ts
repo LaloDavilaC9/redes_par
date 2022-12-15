@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: 'inicio-sesion', component: InicioSesionComponent },
       {path: '', component: InicioSesionComponent}
     ]},
-  { path: 'tutor', component: ModuloRespuestaComponent, /*canActivate: [PermisoTutorGuard],*/
+  { path: 'tutor', component: ModuloRespuestaComponent, canActivate: [PermisoTutorGuard],
     children: [
       {path: 'solicitud', component: SolicitudTutorComponent },
       {path: 'proceso', component: ProcesoTutorComponent },

@@ -1,6 +1,6 @@
 <h3>Solicitud</h3>
 <div>
-  <form [formGroup]="formSolicitud" (ngSubmit)="enviarSolicitud" class="needs-validation" novalidate>
+  <form [formGroup]="formSolicitud" (ngSubmit)="enviarSolicitud()" class="needs-validation" novalidate>
     <!--Campo materia-->
     <div class="form-group mb-3">
       <label class="form-label">Materia</label>
@@ -62,7 +62,7 @@
         <select class="form-select" formControlName="modalidad" 
         [ngClass]="formSolicitud.controls['modalidad'].valid ? 'is-valid' : '' + formSolicitud.controls['modalidad'].invalid && formSolicitud.controls['modalidad'].touched ? 'is-invalid' : ''">
           <option *ngFor="let modalidad of modalidades" [ngValue]="modalidad">
-            {{ modalidad }}
+            {{ modalidad.toUpperCase() }}
           </option>
         </select>
         <div class="invalid-feedback" *ngIf="formSolicitud.controls['modalidad'].invalid && formSolicitud.controls['modalidad'].touched">

@@ -17,7 +17,7 @@
                         <div class="d-grid d-xl-block">
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
                                 data-bs-target="#modalFechas" (click)="aceptar(solicitud.id)">CONFIRMAR</button>
-                            <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
+                            <button class="btn btn-danger btn-lg m-2" (click)="cancelar(solicitud.id)">CANCELAR</button>
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
                                 data-bs-target="#modalDetalles" (click)="verMas(solicitud.id)">VER MÁS</button>
                         </div>
@@ -105,7 +105,7 @@
                     <input type="date" class="form-control">
 
                     <label class="form-label">HORA: </label>
-                    <input type="number" class="form-control">
+                    <input type="time" class="form-control">
 
                     <label class="form-label">TIPO DE ASESORIA: </label><br>
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Respuesta } from 'src/app/modelos/respuesta.model';
+import { solicitudSimplificada } from 'src/app/modelos/solicitud-simplificada.model';
 import { solicitud } from 'src/app/modelos/solicitud.model';
 import { Tutor } from 'src/app/modelos/tutor.model';
 import { AutentificacionService } from 'src/app/modulos/autentificacion/servicios/autentificacion.service';
@@ -12,24 +15,27 @@ import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 export class ProximasTutorComponent implements OnInit {
 
   solicitudes : solicitud[] = []
-  //tutorActual!: Tutor;
   solicitudDetalle! : solicitud;
   totalAsesorias : Number = 0;
-  constructor(private servicio: ServicioApiService, private authservicio: AutentificacionService) { 
-    
+  solicitudSimplificada : solicitudSimplificada = new solicitudSimplificada();
+  
+  constructor(private servicio: ServicioApiService, private aservicio: AutentificacionService, private router: Router) { 
   }
 
   ngOnInit(): void {
+    //Obtener todas las solicitudes
+    this.servicio.getJSON('solicitud/obtenerTodas').subscribe((res: any)=>{
+      this.solicitudes = res as solicitud[];
+    });
+
     //inicializamos solicitud detalle con cualquier cosa
     this.solicitudDetalle = new solicitud;
-    this.cargarSolicitudes();
   }
 
   mostrarSolicitud(solicitudA : solicitud) : boolean{
 
-    
     //La asesoría no es del tutor
-    if(this.authservicio.tutorActual.id != solicitudA.tutorAsesorias.id)
+    if(this.aservicio.tutorActual.id != solicitudA.tutorAsesorias.id)
       return false;
 
     //La solicitud no tiene fecha para llevarse acabo 
@@ -42,99 +48,57 @@ export class ProximasTutorComponent implements OnInit {
   verMas( id : number):void{
     const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
     this.solicitudDetalle = this.solicitudes[indice];
-    //alert("La solicitud es: "+this.solicitudDetalle.ID);
   }
 
   aceptar() : void{
 
   }
 
-  cargarSolicitudes():void{
-    const urapi = `solicitud/obtenerTodas`;
-    //Obtener todas las solicitudes
-    this.servicio.getJSON('solicitud/obtenerTodas').subscribe((res: any)=>{
-      this.solicitudes = res as solicitud[];
+  //Para rechazar o cancelar una solicitud
+  cancelar(id: number) : void{
+    const indice  = this.solicitudes.map(sol => sol.id).indexOf(id);
+    this.solicitudDetalle = this.solicitudes[indice];
+
+    //Vaciar datos en simple
+    this.vaciarDatos()
+
+    //Efectuar api put para modificar los datos
+    this.servicio.actualizar('solicitud/actualizar', this.solicitudSimplificada, this.solicitudSimplificada.id).subscribe((res: any) => {
+      const respuesta: Respuesta = res as Respuesta
+      if(respuesta.estado){//De ser exitoso te lleva a la página de proceso
+        this.router.navigate(['tutor/proceso']);
+      }
+
     });
+
+  }
+
+  //Función que vacía los datos en una solicitud simple
+  vaciarDatos(){
+    this.solicitudSimplificada.id = this.solicitudDetalle.id 
+    this.solicitudSimplificada.alumnoAsesorado = this.solicitudDetalle.alumnoAsesorado.id
+
+    //Modificar id a 0
+    this.solicitudSimplificada.tutorAsesorias = 0
+
+    this.solicitudSimplificada.fechaPeticion = this.solicitudDetalle.fechaPeticion;
+    this.solicitudSimplificada.urgencia = this.solicitudDetalle.urgencia
+    this.solicitudSimplificada.materiaAsesoria = this.solicitudDetalle.materiaAsesoria.id
+    this.solicitudSimplificada.tema = this.solicitudDetalle.tema
+    this.solicitudSimplificada.descripcion = this.solicitudDetalle.descripcion
+
+    //Reestablecer fecha y sitio a vacío
+    this.solicitudSimplificada.fechaAsesoria = "";
+    this.solicitudSimplificada.sitio = "";
+    
+    this.solicitudSimplificada.modalidad = this.solicitudDetalle.modalidad
+    this.solicitudDetalle.tutoresNoDisponibles.forEach(tutor =>{
+      this.solicitudSimplificada.tutoresNoDisponibles.push(tutor.id)
+    })
+    //Añadir tutor a la lista
+    this.solicitudSimplificada.tutoresNoDisponibles.push(this.aservicio.idTutor)
   }
 
 
+
 }
-
-
-/*this.tutorActual = {
-      id : 2,
-      alumnoAsesorias: {
-        id : 247101,
-          nombre: "Cynthia Maritza",
-          apellidoPaterno : "Terán",
-          apellidoMaterno : "Carranza",
-          semestre : 7,
-          telefono : "4499205022",
-          correo : "cynthia@gmail.com",
-          clave : "1234",
-          imagen : ""
-      },
-      materiasAsesorias:[
-        {
-          id : 1,
-          nombre: "Estructuras de Datos",
-          semestre: 3
-        },
-        {
-          id : 2,
-          nombre: "Álgebra Lineal",
-          semestre: 2
-        },
-      ]
-    }; */
-
-
-/*const solicitud1 : solicitud ={
-      id : 5,
-      alumnoAsesorado : {
-        id : 269314,
-        nombre: "ALBERTO",
-        apellidoPaterno : "SÁNCHEZ",
-        apellidoMaterno : "RODRÍGUEZ",
-        semestre : 4,
-        telefono : "4499205022",
-        correo : "alberto.snchez966@gmail.com",
-        clave : "1234",
-        imagen : ""
-      },
-
-      tutorAsesorias : {
-        id : 2,
-        alumnoAsesorias :{
-          id : 247101,
-          nombre: "Cynthia Maritza",
-          apellidoPaterno : "Terán",
-          apellidoMaterno : "Carranza",
-          semestre : 7,
-          telefono : "4499205022",
-          correo : "cynthia@gmail.com",
-          clave : "1234",
-          imagen : ""
-        },
-        materiasAsesorias: [
-          {
-            id : 1,
-            nombre : "Estructuras de datos",
-            semestre : 3
-          }
-        ]
-      },
-      fechaPeticion : "25/01/2022",
-      urgencia : false,
-      materiaAsesoria : {
-        id : 1,
-        nombre : "Estructuras de datos",
-        semestre : 3
-      },
-      tema : "Ciclos",
-      descripcion: "No le entiendo a mi profe",
-      fechaAsesoria : "22/01/2023 16:00",
-      sitio : "BIBLIOTECA",
-      modalidad : "Presencial",
-      tutoresNoDisponibles : []
-    }*/

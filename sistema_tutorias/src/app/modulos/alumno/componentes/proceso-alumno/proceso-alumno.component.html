@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="container text-center">
                 <div class="row">
-                    <div *ngIf="solicitud.tutorAsesorias.alumnoAsesorias.nombre !='' else espera" class="col align-self-center">
+                    <div *ngIf="solicitud.tutorAsesorias.alumnoAsesorias != null else espera" class="col align-self-center">
                         <h4 class="fst-italic text-muted">Nombre del tutor</h4>
                         <h4>{{solicitud.tutorAsesorias.alumnoAsesorias.nombre.toUpperCase()}}
                             {{solicitud.tutorAsesorias.alumnoAsesorias.apellidoPaterno.toUpperCase()}}

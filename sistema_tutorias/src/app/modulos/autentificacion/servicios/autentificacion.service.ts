@@ -18,6 +18,7 @@ import { ServicioApiService } from 'src/app/servicios/servicio-api.service';
 export class AutentificacionService {
   
   tutorActual: Tutor = new Tutor();
+  alumnoActual: Alumno = new Alumno();
   idAlumno: number = 0;
   idTutor : number = 0;
   autorizacion: boolean = false; 
@@ -29,30 +30,22 @@ export class AutentificacionService {
 
   asignarDatosAlumno(id: number){
     this.idAlumno = id;
-    //Obtener id del tutor
-    const urapi = `tutor/obtenerTodos`;
-    //Obtener todas las solicitudes
-    this.servicio.getJSON('solicitud/obtenerTodas').subscribe((res: any)=>{
-      this.tutores = res as Tutor[];
-       //Se encuentra el ID del tutor
-       this.tutores.forEach(element => {
-        if(element.alumnoAsesorias.id == this.idAlumno){
-          this.tutorActual = element;
-        }
-       })
-          
-    });
-
   }
 
 
-  get getStatus(): boolean {
+  get getStatusAlumno(): boolean {
     return this.autorizacion;
+  }
+
+  get getStatusTutor(): boolean {
+    return this.idTutor != 0 ? true : false;
   }
 
   //Función para cerrar sesión
   cerrarSesion(): void {
-    sessionStorage.clear;
+    this.autorizacion  = false;
+    this.idAlumno = 0;
+    this.idTutor = 0;
     this.router.navigate(['/inicio-sesion']);
   }
 }

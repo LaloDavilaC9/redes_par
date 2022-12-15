@@ -15,8 +15,8 @@
                         <h4 class="text-danger fw-bold" *ngIf="solicitud.urgencia">URGENTE</h4>
                         <h4 class="text-warning fw-bold" *ngIf="!solicitud.urgencia">PUEDE ESPERAR</h4>
                         <div class="d-grid d-xl-block">
-                            <button class="btn btn-success btn-lg m-2" (click)="aceptar()">ACEPTAR</button>
-                            <button class="btn btn-danger btn-lg m-2">CANCELAR</button>
+                            <button class="btn btn-success btn-lg m-2" (click)="actualizarSolicitud(solicitud.id,0)">ACEPTAR</button>
+                            <button class="btn btn-danger btn-lg m-2" (click)="actualizarSolicitud(solicitud.id,1)">CANCELAR</button>
                             <button class="btn btn-info btn-lg m-2" data-bs-toggle="modal"
                                 data-bs-target="#modalDetalles" (click)="verMas(solicitud.id)">VER MÁS</button>
                         </div>

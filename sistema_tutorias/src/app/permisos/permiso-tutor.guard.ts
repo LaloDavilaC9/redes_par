@@ -13,7 +13,7 @@ export class PermisoTutorGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.servicioAut.idTutor != null) {
+      if (!this.servicioAut.idTutor) {
         this.router.navigate(['registrotutor']);
       }
       return true;
