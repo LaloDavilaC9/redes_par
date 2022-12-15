@@ -1,0 +1,46 @@
+<!-- Modal fechas-->
+<div class="modal fade " id="modalFechas" tabindex="-1" aria-labelledby="modalFechas" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFechasNombre">Agendar asesoría</h5>
+            </div>
+            <div class="modal-body">
+                <div class="my-2">
+                    <h5 class="fw-bold">Datos de la asesoría</h5>
+
+                    <label class="form-label">Nombre del alumno asesorado</label>
+                    <input type="text"
+                        value="{{solicitudAgenda.alumnoAsesorado.nombre.toUpperCase()}} {{solicitudAgenda.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitudAgenda.alumnoAsesorado.apellidoMaterno.toUpperCase()}}"
+                        class="form-control" readonly>
+
+                    <label class="form-label">Materia solicitada</label>
+                    <input type="text" value=" {{solicitudAgenda.materiaAsesoria.nombre.toUpperCase()}}"
+                        class="form-control" readonly>
+
+                    <form [formGroup]="formAgenda" (ngSubmit)="agendar()" class="needs-validation" novalidate>
+                        <!--Materias disponibles para el alumno-->
+                        <div class="form-group mb-3">
+                            <label class="form-label">Fecha</label>
+                            <input type="datetime-local" class="form-control" formControlName="fecha"
+                                [ngClass]="formAgenda.controls['fecha'].valid ? 'is-valid': '' + formAgenda.controls['fecha'].invalid && formAgenda.controls['fecha'].touched? 'is-invalid': ''" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Sitio</label>
+                            <input type="text" class="form-control" formControlName="sitio"
+                                [ngClass]="formAgenda.controls['sitio'].valid ? 'is-valid': '' + formAgenda.controls['sitio'].invalid && formAgenda.controls['sitio'].touched? 'is-invalid': ''" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-secondary btn-block"
+                                [disabled]="!formAgenda.valid">Programar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

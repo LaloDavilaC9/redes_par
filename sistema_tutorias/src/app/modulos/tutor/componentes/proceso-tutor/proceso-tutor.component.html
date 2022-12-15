@@ -82,44 +82,4 @@
 
 
 <!-- Modal fechas-->
-<div class="modal fade " id="modalFechas" tabindex="-1" aria-labelledby="modalFechas" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalFechasNombre">Agendar asesoría</h5>
-            </div>
-            <div class="modal-body">
-                <div class="my-2">
-                    <h5 class="fw-bold">Datos de la asesoría</h5>
-
-                    <label class="form-label">NOMBRE DEL ALUMNO:</label>
-                    <input type="text"
-                        value="{{solicitudDetalle.alumnoAsesorado.nombre.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoPaterno.toUpperCase()}} {{solicitudDetalle.alumnoAsesorado.apellidoMaterno.toUpperCase()}}"
-                        class="form-control" readonly>
-                    
-                    <label class="form-label">MATERIA SOLICITADA</label>
-                    <input type="text" value=" {{solicitudDetalle.materiaAsesoria.nombre.toUpperCase()}}"
-                        class="form-control" readonly>
-                     
-                    <label class="form-label">FECHA: </label>
-                    <input type="date" class="form-control">
-
-                    <label class="form-label">HORA: </label>
-                    <input type="time" class="form-control">
-
-                    <label class="form-label">TIPO DE ASESORIA: </label><br>
-                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                        <input class="btn-check" type="radio" id="presencial"  name="grupoTipo" value="Presencial" checked>
-                        <label  class="btn btn-outline-primary" for="presencial">Presencial</label>
-                        <input class="btn-check" type="radio" id="virtual"  name="grupoTipo" value="Virtual">
-                        <label class="btn btn-outline-primary" for="virtual">Virtual</label>
-                    </div>
-                </div>
-                
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Programar</button>
-            </div>
-        </div>
-    </div>
-</div>
+<app-agenda-form [solicitudAgenda]="solicitudDetalle"></app-agenda-form>

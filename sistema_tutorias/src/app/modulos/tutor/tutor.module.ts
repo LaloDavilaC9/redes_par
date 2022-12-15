@@ -5,6 +5,7 @@ import { ProximasTutorComponent } from './componentes/proximas-tutor/proximas-tu
 import { ProcesoTutorComponent } from './componentes/proceso-tutor/proceso-tutor.component';
 import { FormularioTutorComponent } from './componentes/formulario-tutor/formulario-tutor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgendaFormComponent } from './componentes/agenda-form/agenda-form.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProximasTutorComponent,
     ProcesoTutorComponent,
     FormularioTutorComponent,
+    AgendaFormComponent,
   ],
   imports: [
     CommonModule,
