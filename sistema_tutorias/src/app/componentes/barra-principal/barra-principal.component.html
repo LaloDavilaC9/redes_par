@@ -4,8 +4,15 @@
       <img src="assets/img/logouaa.png" alt="..." width="100px" />
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -26,3 +33,19 @@
     </div>
   </div>
 </nav>
+<div class="container-fluid p-5">
+  <div class="card text-white bg-success mb-3">
+    <div class="card-header">Estado del Clima en {{ climaLugar }}</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col text-end">
+          <h4 class="card-title">Status: {{ climaTitulo }}</h4>
+          <h5 class="card-text">Description: {{ climaDescripcion }}</h5>
+        </div>
+        <div class="col">
+          <img src="assets/img/dia-nublado.png" alt="..." width="100px" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

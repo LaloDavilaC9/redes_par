@@ -20,6 +20,11 @@ export class ServicioApiService {
     const urlpath = this.base + url;
     return this.httpClient.get(urlpath);
   }
+  //Método para obtener los datos
+  getJSONClima(url: string) {
+    return this.httpClient.get(url);
+  }
+
 
   //Método para registrar datos
   registrar(url: string, object: any){
